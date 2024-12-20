@@ -86,19 +86,11 @@ export function MailContent({ source, stats, subscription, onSourceChange }: Mai
                 return;
             }
 
-<<<<<<< HEAD
-            const updateResult = await updateMailSourceField(mailSourceUpdate);
-=======
             onSourceChange({ ...source, mail_source: mailSourceUpdate });
             await updateMailSourceField(mailSourceUpdate);
->>>>>>> origin/master
 
             if (removedKeys.size > 0) {
-<<<<<<< HEAD
-                const removeResult = await removeMailSourceField(removedKeys);
-=======
                 await removeMailSourceField(removedKeys);
->>>>>>> origin/master
                 setRemovedKeys(new Set());
             }
 
