@@ -99,7 +99,7 @@ export function OrgImageForm({ currentOrg }: OrgImageFormProps) {
             toast.success("Image uploaded successfully");
         } catch (error) {
             toast.error("Image could not be uploaded", {
-                description: "Please check your premissions",
+                description: "Please check your permissions",
             });
         }
     };
