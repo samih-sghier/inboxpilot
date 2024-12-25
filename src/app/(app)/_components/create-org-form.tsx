@@ -111,9 +111,9 @@ export function CreateOrgForm({ open, setOpen }: CreateOrgFormProps) {
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        Enter the email of your organization.
-                                        This could be your personal email or a
-                                        shared email.
+                                        Enter the email of your organization. This could be your personal email or a
+                                        shared email.This email will be used for administrative purposes only
+                                        and will not be linked for automated responses.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>

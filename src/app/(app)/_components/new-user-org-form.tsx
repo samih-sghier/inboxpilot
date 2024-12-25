@@ -104,7 +104,7 @@ export function NewUserOrgForm({
         } catch (error) {
             toast.error(
                 (error as { message?: string })?.message ??
-                    "Organization could not be created",
+                "Organization could not be created",
             );
         }
     };
@@ -135,9 +135,9 @@ export function NewUserOrgForm({
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        Enter the email of your organization.
-                                        This could be your personal email or a
-                                        shared email.
+                                        Enter the email of your organization. This could be your personal email or a
+                                        shared email.This email will be used for administrative purposes only
+                                        and will not be linked for automated responses.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -188,8 +188,8 @@ export function NewUserOrgForm({
                             className="gap-2"
                         >
                             {isPending ||
-                            isMutatePending ||
-                            isCompleteNewUserPending ? (
+                                isMutatePending ||
+                                isCompleteNewUserPending ? (
                                 <Icons.loader className="h-4 w-4" />
                             ) : null}
                             <span>Continue</span>
