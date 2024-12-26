@@ -174,7 +174,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
                 // Update the website data field with the new link and its LLM data
                 const websiteDataUpdate = { [urlToValidate]: truncatedText };
-                      // Trigger onSourceChange to notify parent about the update
+                // Trigger onSourceChange to notify parent about the update
                 const newWebsiteData = { ...source.website_data, [urlToValidate]: truncatedText };
                 onSourceChange({ ...source, website_data: newWebsiteData });
                 await updateWebsiteDataField(websiteDataUpdate);
@@ -562,7 +562,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                                     <Badge variant="destructive">Error</Badge>
                                 )}
                                 <p className="text-m text-muted-foreground flex-grow">{link.url}</p>
-                                {link.llmData && link.llmData.startsWith('Failed to fetch') ? (
+                                {(link.llmData?.startsWith('Failed to fetch') || !link.llmData) && !fetching ? (
                                     <button
                                         onClick={async () => await retryAddLink(link.url)}
                                         className="ml-4 text-muted-foreground hover:text-primary transition-colors"

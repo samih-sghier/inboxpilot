@@ -16,7 +16,7 @@ export async function GET(request: Request) {
         // Exchange the authorization code for tokens
         const { tokens, email, metadata } = await handleOAuthCallbackMutation({ code, state });
         // const emails = await listEmailsMutation(tokens);
-        
+
 
         // Optionally, you can store the tokens or any other information here
 
@@ -26,6 +26,19 @@ export async function GET(request: Request) {
 
     } catch (error) {
         console.error("Error exchanging code for tokens: ", error);
-        return NextResponse.json({ error: `Failed to exchange code for tokens: ${error.message}` }, { status: 500 });
+
+        // Check for the specific error related to the unique constraint violation
+        if (error?.message.includes("sg_connected_pkey")) {
+            return NextResponse.json(
+                { error: "This account is already linked to another organization" },
+                { status: 400 } // Use an appropriate status code
+            );
+        }
+
+        // Handle other errors
+        return NextResponse.json(
+            { error: `Failed to exchange code for tokens: ${error?.message}` },
+            { status: 500 }
+        );
     }
 }
