@@ -73,22 +73,22 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "3",
-        title: "20,000 email tokens",
+        title: "20,000 email tokens (~20 Emails)",
         includedIn: [pricingIds.free],
     },
     {
         id: "4",
-        title: "150,000 email tokens",
+        title: "150,000 email tokens (~200 Emails)",
         includedIn: [pricingIds.hobby],
     },
     {
         id: "5",
-        title: "1,000,000 email tokens",
+        title: "1,000,000 email tokens (~1,000 Emails)",
         includedIn: [pricingIds.standard],
     },
     {
         id: "6",
-        title: "5,000,000 email tokens",
+        title: "5,000,000 email tokens (~5,000 Emails)",
         includedIn: [pricingIds.unlimited],
     },
     {
