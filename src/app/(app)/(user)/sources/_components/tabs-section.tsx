@@ -81,7 +81,7 @@ export function TabsSection({ source, subscription, stats }: { source: any, subs
             {/* Lazy load tab contents */}
             {activeTab === "files" && (
                 <Tabs.Content value="files" className="p-4">
-                    <FileUploadForm source={currentSource} subscription={subscription} stats={stats} />
+                    <FileUploadForm source={currentSource} subscription={subscription} stats={stats} onSourceChange={handleSourceChange} />
                 </Tabs.Content>
             )}
             {activeTab === "text" && (

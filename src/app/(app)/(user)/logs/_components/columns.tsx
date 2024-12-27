@@ -42,7 +42,7 @@ const TruncatedContent = ({ content }: { content: string }) => {
 
 const EmailViewDialog = ({ email }: { email: EmailLogData }) => {
     return (
-        <DialogContent className="sm:max-w-[700px]">
+        <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-hidden flex flex-col">
             <DialogHeader>
                 <DialogTitle>{email.subject}</DialogTitle>
             </DialogHeader>

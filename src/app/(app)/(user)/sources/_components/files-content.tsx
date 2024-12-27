@@ -161,7 +161,7 @@ const parseJSON = (file: File): Promise<string> => {
 };
 
 
-export function FileUploadForm({ source, subscription, stats }: { source: any, subscription: any, stats: any }) {
+export function FileUploadForm({ source, subscription, stats, onSourceChange }: { source: any, subscription: any, stats: any, onSourceChange: (newSource: any) => void }) {
     const [files, setFiles] = useState<File[]>([]);
     const [uploadProgress, setUploadProgress] = useState<number>(0);
     const [convertedData, setConvertedData] = useState<Map<string, string>>(source?.documents ? new Map(Object.entries(source.documents)) : new Map());
@@ -243,7 +243,10 @@ export function FileUploadForm({ source, subscription, stats }: { source: any, s
             const documentsUpdate: Record<string, string> = Object.fromEntries(
                 Array.from(new Map(convertedData).set(file.name, text))
             );
-
+            onSourceChange({
+                ...source,
+                documents: documentsUpdate
+            });
             // Update the documents field in the database
             await updateDocumentsField(documentsUpdate);
             toast.success(`Document processed successfully (${text.length || 0} chars)`);
