@@ -14,11 +14,7 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "https://www.inboxpilot.co"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google.com *.microsoft.com *.utfs.io *.resend.com *.microsoftonline.com *.googleapis.com *.posthog.com; style-src 'self' 'unsafe-inline' *.google.com *.microsoft.com *.utfs.io *.resend.com *.microsoftonline.com *.googleapis.com *.posthog.com; img-src 'self' https://utfs.io.com *.google.com *.microsoft.com *.utfs.io *.resend.com *.microsoftonline.com *.googleapis.com *.posthog.com data: blob:; connect-src 'self' *.amazonaws.com https://r.jina.ai *.jina.ai *.w3.org https://www.w3.org *.google.com *.microsoft.com *.utfs.io *.resend.com *.microsoftonline.com *.googleapis.com *.posthog.com; font-src 'self' *.google.com *.microsoft.com *.utfs.io *.resend.com *.microsoftonline.com *.googleapis.com; frame-src 'self' *.google.com *.microsoft.com *.utfs.io *.resend.com *.microsoftonline.com *.googleapis.com *.unsplash.com *.posthog.com *.amazonaws.com;"
-        },        
+        },      
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()"
