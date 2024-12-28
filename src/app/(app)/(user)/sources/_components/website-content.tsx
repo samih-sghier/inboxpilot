@@ -148,7 +148,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
             try {
                 const response = await fetch(`https://r.jina.ai/${urlToValidate}`, {
                     headers: {
-                        'Authorization': `Bearer jina_9097e80c82894797bf1b936be0c6eab3agq86HRaynVbsZ_yGrHmLsnj3J3o`,
+                        'Authorization': `Bearer ${env.CRAWLER_API_KEY}`,
                         'Content-Type': 'application/json',
                     }
                 });
@@ -217,7 +217,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
             const response = await fetch(`https://r.jina.ai/${newLink}`, {
                 headers: {
-                    'Authorization': `Bearer jina_9097e80c82894797bf1b936be0c6eab3agq86HRaynVbsZ_yGrHmLsnj3J3o`,
+                    'Authorization': `Bearer ${env.CRAWLER_API_KEY}`,
                     'Content-Type': 'application/json',
                 }
             });
@@ -297,7 +297,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
                     const response = await fetch(`https://r.jina.ai/${link.url}`, {
                         headers: {
-                            'Authorization': `Bearer jina_9097e80c82894797bf1b936be0c6eab3agq86HRaynVbsZ_yGrHmLsnj3J3o`,
+                            'Authorization': `Bearer ${env.CRAWLER_API_KEY}`,
                             'Content-Type': 'application/json',
                         },
                         signal: controller.signal
