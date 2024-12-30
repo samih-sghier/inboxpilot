@@ -552,7 +552,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                         <div key={link.id} className="flex items-center bg-gray-100 p-2 rounded-md">
                             <div className="flex items-center space-x-2 flex-grow">
                                 {link.llmData ? (
-                                    link.llmData.startsWith('Failed to fetch') ? (
+                                    typeof link.llmData === 'string' && link.llmData.startsWith('Failed to fetch') ? (
                                         <Badge variant="destructive">Error</Badge>
                                     ) : (
                                         <Badge variant="success">Trained</Badge>
@@ -563,7 +563,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                                     <Badge variant="destructive">Error</Badge>
                                 )}
                                 <p className="text-m text-muted-foreground flex-grow">{link.url}</p>
-                                {(link.llmData?.startsWith('Failed to fetch') || !link.llmData) && !fetching ? (
+                                {(typeof link.llmData === 'string' && link.llmData?.startsWith('Failed to fetch') || !link.llmData) && !fetching ? (
                                     <button
                                         onClick={async () => await retryAddLink(link.url)}
                                         className="ml-4 text-muted-foreground hover:text-primary transition-colors"

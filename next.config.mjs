@@ -18,6 +18,9 @@ const nextConfig = {
     experimental: {
         optimizePackageImports: ["lucide-react"],
         sri: { algorithm: 'sha256' }, // Enable Subresource Integrity (SRI)
+        serverActions: {
+            bodySizeLimit: '10mb',
+          },
     },
     images: {
         remotePatterns: [{ hostname: "images.unsplash.com" }, { hostname: "utfs.io" }],
