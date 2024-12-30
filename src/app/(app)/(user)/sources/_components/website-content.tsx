@@ -148,7 +148,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
             try {
                 const response = await fetch(`https://r.jina.ai/${urlToValidate}`, {
                     headers: {
-                        'Authorization': `Bearer ${env.CRAWLER_API_KEY}`,
+                        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CRAWLER_API_KEY}`,
                         'Content-Type': 'application/json',
                     }
                 });
@@ -175,8 +175,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                 // Update the website data field with the new link and its LLM data
                 const websiteDataUpdate = { [urlToValidate]: truncatedText };
                 // Trigger onSourceChange to notify parent about the update
-                const newWebsiteData = { ...source.website_data, [urlToValidate]: truncatedText };
-                onSourceChange({ ...source, website_data: newWebsiteData });
+                onSourceChange({ ...source, website_data: websiteDataUpdate });
                 await updateWebsiteDataField(websiteDataUpdate);
 
                 toast.success('Link added and LLM data fetched successfully.');
@@ -217,7 +216,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
             const response = await fetch(`https://r.jina.ai/${newLink}`, {
                 headers: {
-                    'Authorization': `Bearer ${env.CRAWLER_API_KEY}`,
+                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CRAWLER_API_KEY}`,
                     'Content-Type': 'application/json',
                 }
             });
@@ -236,7 +235,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                 toast.warning(`The content was truncated to fit within your plan's character limit.`);
             }
 
-            // Update the existing link's LLM data
+
             setLinks(prevLinks => prevLinks.map(link =>
                 link.url === newLink
                     ? { ...link, llmData: truncatedText }
@@ -245,6 +244,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
             // Update the website data field
             const websiteDataUpdate = { [newLink]: truncatedText };
+            onSourceChange({ ...source, website_data: links });
             await updateWebsiteDataField(websiteDataUpdate);
 
             toast.success('Link refetched successfully');
@@ -297,7 +297,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
                     const response = await fetch(`https://r.jina.ai/${link.url}`, {
                         headers: {
-                            'Authorization': `Bearer ${env.CRAWLER_API_KEY}`,
+                            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CRAWLER_API_KEY}`,
                             'Content-Type': 'application/json',
                         },
                         signal: controller.signal
@@ -525,6 +525,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                             <Button variant="ghost" onClick={() => {
                                 const ls = links.map(l => l.url);
                                 removeWebsiteDataField(new Set(ls));
+                                onSourceChange({ ...source, website_data: [] });
                                 setLinks([])
                             }} className="text-red-500">
                                 Delete all
