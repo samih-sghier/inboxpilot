@@ -40,7 +40,7 @@ export async function authorizeOutlook(metadata) {
         redirectUri,
         scopes: ["User.Read", "Mail.Read", "Mail.Send", "offline_access"],
         state: JSON.stringify(metadata),
-        prompt: "consent", // Force consent screen
+        prompt: "select_account",
 
     });
     return authUrl;
