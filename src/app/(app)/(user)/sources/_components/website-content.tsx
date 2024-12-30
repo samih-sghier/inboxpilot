@@ -491,7 +491,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                 <p className="text-sm font-medium mb-2">Submit Sitemap</p>
                 <div className="flex space-x-2">
                     <Input
-                        placeholder="https://www.inboxpilot.co/sitemap.xml"
+                        placeholder="https://www.example.com/sitemap.xml"
                         className="flex-1"
                         value={sitemapLink}
                         onChange={(e) => setSitemapLink(e.target.value)}

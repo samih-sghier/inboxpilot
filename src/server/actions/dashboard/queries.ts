@@ -22,6 +22,7 @@ export async function getDashboardInfo() {
             sources: 0,
             scheduledEmails: 0,
             // avgResponseTimeChange: 0,
+            overLimit: false,
             alerts: 0,
             apiUsage: 0,
             apiUsageChange: 0
@@ -78,7 +79,7 @@ export async function getDashboardInfo() {
 
     // Implement logic for other metrics...
     const tokenUsage: number | undefined = currentOrg.tokens || 0;
-    const maxTokens: number | undefined = currentOrg.max_tokens || await getOrgTokensBasedOnPlan();
+    const maxTokens: number | undefined = currentOrg?.max_tokens || await getOrgTokensBasedOnPlan();
 
     return {
         emailsSent,
@@ -89,6 +90,7 @@ export async function getDashboardInfo() {
         connectedEmailsGrowth: 0, // Placeholder
         sources: sourcesNotNull, // Placeholder
         scheduledEmails: 0, // Placeholder
+        overLimit: tokenUsage >= maxTokens,
         alerts, // Placeholder
         apiUsage: `${formatNumber(tokenUsage)} / ${formatNumber(maxTokens)}`, // Use the new formatNumber function
         apiUsageChange: 0 // Placeholder

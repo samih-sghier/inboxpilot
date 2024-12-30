@@ -1,6 +1,6 @@
 import { AppPageShell } from "@/app/(app)/_components/page-shell";
 import { dashboardPageConfig } from "@/app/(app)/(user)/dashboard/_constants/page-config";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     ActivityIcon,
     CreditCardIcon,
@@ -33,6 +33,7 @@ import { formatNumberWithCommas } from "../sources/_components/sources-card";
 export default async function DashboardPage() {
     const dashInfo = await getDashboardInfo();
     const subscription = await getOrgSubscription();
+    // const router = useRouter();
 
     return (
         <AppPageShell
@@ -52,10 +53,12 @@ export default async function DashboardPage() {
                             </CardHeader>
                             <CardContent>
                                 <div className="text-2xl font-bold">{dashInfo.emailsSent}</div>
+                            </CardContent>
+                            <CardFooter>
                                 <p className="text-xs text-muted-foreground">
                                     {dashInfo.emailsSentGrowth > 0 ? '+' : ''}{dashInfo.emailsSentGrowth}% from last month
                                 </p>
-                            </CardContent>
+                            </CardFooter>
                         </Card>
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -125,7 +128,17 @@ export default async function DashboardPage() {
                             </CardHeader>
                             <CardContent>
                                 <div className="text-2xl font-bold">{dashInfo.apiUsage}</div>
+
                             </CardContent>
+                            <CardFooter>
+                                {dashInfo.overLimit && (
+                                    <div className="space-y-2">
+                                        <p className="text-xs text-red-600">
+                                            You have exceeded your token limit for your current plan
+                                        </p>
+                                    </div>
+                                )}
+                            </CardFooter>
                         </Card>
                         <Card className="relative">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -164,10 +177,28 @@ export default async function DashboardPage() {
                                     )}
                                 </p>
                             </CardContent>
+                            <CardFooter>
+                                <form
+                                    action={async () => {
+                                        "use server";
+                                        redirect(siteUrls.organization.plansAndBilling);
+                                    }}
+                                >
+                                    <Button
+                                        variant="destructive"
+                                        className="w-full"
+                                    >
+                                        Upgrade Plan
+                                    </Button>
+                                </form>
+
+
+                            </CardFooter>
+
                         </Card>
                     </div>
                 </div>
             </Suspense>
-        </AppPageShell>
+        </AppPageShell >
     );
 }
