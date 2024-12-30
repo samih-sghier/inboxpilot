@@ -49,10 +49,10 @@ export default async function UserTenantPage() {
             <Suspense fallback={<SidebarLoading />}>
                 <div className="flex w-full items-start justify-between mb-6">
                     <h2 className="text-base font-medium sm:text-lg">
-                        {source.length} email accounts you have added.
+                        {source.length} email accounts you have linked.
                     </h2>
 
-                    <ConnectEmailForm defaultOpen={false} orgId={currentOrg.id} upgradeNeeded={(subscription?.plan?.chatbots ?? 1) < source.length} />
+                    <ConnectEmailForm defaultOpen={false} orgId={currentOrg.id} upgradeNeeded={(subscription?.plan?.planLimit ?? 1) <= source.length} />
                 </div>
 
                 <div className={source.length > 0 ? "grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid gap-4"}>
