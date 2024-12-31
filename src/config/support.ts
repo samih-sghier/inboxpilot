@@ -35,7 +35,7 @@ export const supportInfos: SupportInfo[] = [
         title: "Tech Support",
         description:
             "Get help with any technical issues you are facing. Our team will help you resolve any issues.",
-        email: "tech@inboxpilot.co",
+        email: "support@inboxpilot.co",
         buttonHref: `mailto:support@inboxpilot.co`,
         buttonText: "Get in touch",
     },
