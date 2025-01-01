@@ -2,7 +2,9 @@
 
 import { db } from "@/server/db";
 import {
+    connected,
     createOrgInsertSchema,
+    emailLogs,
     membersToOrganizations,
     membersToOrganizationsInsertSchema,
     orgRequestInsertSchema,
