@@ -9,7 +9,7 @@ export const siteConfig = {
     description:
         "Auomate Inbound Emails",
     orgImage:
-        "https://utfs.io/f/z1SQx2HK8PtsY15Q8uvaYyIlbV8gfnFD97GK6rEtwcUpWJx5",
+        "https://utfs.io/f/z1SQx2HK8Pts7SALuDtXkWVjivSnqfBPEIcCFDdzH9NZ1r3O",
     contactEmail: "support@inboxpilot.co",
     noReplyEmail: "no-reply@inboxpilot.co",
     catchyPhrases: [
