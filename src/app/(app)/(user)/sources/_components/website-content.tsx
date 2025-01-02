@@ -175,7 +175,12 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                 // Update the website data field with the new link and its LLM data
                 const websiteDataUpdate = { [urlToValidate]: truncatedText };
                 // Trigger onSourceChange to notify parent about the update
-                onSourceChange({ ...source, website_data: websiteDataUpdate });
+                onSourceChange({
+                    ...source, website_data: {
+                        ...source.website_data, // Keep existing website data
+                        [urlToValidate]: truncatedText // Add new data
+                    }
+                });
                 await updateWebsiteDataField(websiteDataUpdate);
 
                 toast.success('Link added and LLM data fetched successfully.');
@@ -207,7 +212,6 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
             }
         }
     };
-
     const retryAddLink = async (newLink: string) => {
         try {
             toast.info(`Refetching ${newLink}`);
@@ -235,26 +239,43 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
                 toast.warning(`The content was truncated to fit within your plan's character limit.`);
             }
 
+            // Update links state while preserving URL keys
+            setLinks(prevLinks =>
+                prevLinks.map(link =>
+                    link.url === newLink
+                        ? { ...link, llmData: truncatedText }
+                        : link
+                )
+            );
 
-            setLinks(prevLinks => prevLinks.map(link =>
-                link.url === newLink
-                    ? { ...link, llmData: truncatedText }
-                    : link
-            ));
+            // Create a new website_data object that preserves all existing URLs
+            const updatedWebsiteData = links.reduce((acc, link) => {
+                // Keep existing data for other links
+                acc[link.url] = link.llmData || '';
+                return acc;
+            }, {} as Record<string, string>);
 
-            // Update the website data field
-            const websiteDataUpdate = { [newLink]: truncatedText };
-            onSourceChange({ ...source, website_data: links });
-            await updateWebsiteDataField(websiteDataUpdate);
+            // Add or update the new link's data
+            updatedWebsiteData[newLink] = truncatedText;
 
+            // Update the source with the complete website_data object
+            onSourceChange({
+                ...source,
+                website_data: updatedWebsiteData
+            });
+
+            await updateWebsiteDataField(updatedWebsiteData);
             toast.success('Link refetched successfully');
+
         } catch (error) {
             // Update the link with error message
-            setLinks(prevLinks => prevLinks.map(link =>
-                link.url === newLink
-                    ? { ...link, llmData: `Failed to fetch LLM data: ${error.message}` }
-                    : link
-            ));
+            setLinks(prevLinks =>
+                prevLinks.map(link =>
+                    link.url === newLink
+                        ? { ...link, llmData: `Failed to fetch LLM data: ${error.message}` }
+                        : link
+                )
+            );
             toast.error('Failed to fetch link data');
         } finally {
             setFetching(false);

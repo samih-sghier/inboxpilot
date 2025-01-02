@@ -74,31 +74,7 @@ export default async function HomePage() {
                 </div>
             </WebPageHeader>
 
-            <div className="-m-2 w-full rounded-xl bg-foreground/5 p-2 ring-1 ring-inset ring-foreground/10 shadow-[0_0_32px_#603060,0_0_64px_#603060] lg:-m-4 lg:rounded-2xl lg:p-4">
-                <div className="relative aspect-video w-full rounded-md bg-muted">
-                    <Image
-                        src="https://utfs.io/f/z1SQx2HK8PtsaFzGPt8VkwuCAY9BKDHeQtXhMpfi8qSyO5xl"
-                        alt="dashboard preview"
-                        fill
-                        className="block rounded-md border border-border border-[0.5px] dark:hidden"
-                        priority
-                    />
-
-                    <Image
-                        src="https://utfs.io/f/z1SQx2HK8PtsY15Q8uvaYyIlbV8gfnFD97GK6rEtwcUpWJx5"
-                        alt="dashboard preview"
-                        fill
-                        className="hidden rounded-md border border-border border-[0.5px] dark:block"
-                        priority
-                    />
-                </div>
-            </div>
-
-
-
-
-
-
+            <VideoDisplay />
             <HowItWorks />
             <Features />
             <Promotion />
@@ -106,3 +82,30 @@ export default async function HomePage() {
         </WebPageWrapper>
     );
 }
+
+
+const VideoDisplay = () => {
+    // YouTube parameters for high quality playback
+    const videoId = 'KsEslSc5utU';
+    const params = new URLSearchParams({
+        rel: '0',           // Don't show related videos
+        modestbranding: '1', // Minimal YouTube branding
+        hd: '1',            // Force HD mode
+        vq: 'hd1080',       // Request 1080p quality
+        controls: '1',       // Show player controls
+    }).toString();
+
+    return (
+        <div className="-m-2 w-full rounded-xl bg-foreground/5 p-2 ring-1 ring-inset ring-foreground/10 shadow-[0_0_32px_#603060,0_0_64px_#603060] lg:-m-4 lg:rounded-2xl lg:p-4">
+            <div className="relative aspect-video w-full rounded-md bg-muted">
+                <iframe
+                    className="absolute top-0 left-0 w-full h-full rounded-md border border-border border-[0.5px]"
+                    src={`https://www.youtube.com/embed/${videoId}?${params}`}
+                    title="InboxPilot Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                />
+            </div>
+        </div>
+    );
+};

@@ -85,12 +85,14 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                 <Button type="button">Connect Email</Button>
             </DialogTrigger>
             <DialogContent className="max-h-screen overflow-auto">
-                <DialogHeader>
-                    <DialogTitle>Connect Your Email Account</DialogTitle>
-                    <DialogDescription>
-                        Please provide the email address you want to connect and additional details.
-                    </DialogDescription>
-                </DialogHeader>
+            <DialogHeader className="text-center">
+      <DialogTitle className="text-xl font-semibold">
+        Link your Email Account
+      </DialogTitle>
+      <DialogDescription className="mt-2">
+        Your privacy is our priority. All communications are fully encrypted, and we never access, store, or retain your data.
+      </DialogDescription>
+    </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="grid w-full gap-4">
 
