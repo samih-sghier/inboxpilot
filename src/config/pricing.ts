@@ -168,7 +168,7 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "22",
-        title: "Remove 'Powered by Inboxpilot.co'",
+        title: "Remove 'Powered by InboxPilot'",
         includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
     }
 ];

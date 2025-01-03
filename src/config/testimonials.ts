@@ -19,7 +19,7 @@ type Testimonial = {
 };
 
 export const featuredTestimonial: Testimonial = {
-    body: "Inboxpilot has transformed how we manage emails. It's a game changer!",
+    body: "InboxPilot has transformed how we manage emails. It's a game changer!",
     author: {
         name: "Lara Thompson",
         handle: "larartofficial",

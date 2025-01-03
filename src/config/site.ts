@@ -18,7 +18,7 @@ export const siteConfig = {
         "Email Assistant",
         "AI Email Assistant",
         "Stay Ahead with Smart Email Management!",
-        "Effortless Communication with Inboxpilot!",
+        "Effortless Communication with InboxPilot!",
         "Your Partner in Email Efficiency!",
         "Real-Time Support, Just a Click Away!",
         "Simplify Your Email Workflow!",
