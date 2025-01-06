@@ -135,7 +135,7 @@ const navigation: SidebarNavItems[] = [
                 href: siteUrls.dashboard.sources,
             },
             {
-                label: "Link Accounts",
+                label: "Connect Accounts",
                 icon: LinkIcon,
                 href: siteUrls.dashboard.connect,
             },
