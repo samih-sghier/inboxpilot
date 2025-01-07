@@ -63,7 +63,7 @@ export default async function UserTenantPage() {
                                 <CardContent className="p-4 flex flex-col justify-between h-full">
                                     <div>
                                         <CardTitle className="text-xl font-semibold mb-2">{emailConnected.email}</CardTitle>
-                                        <CardDescription className="text-sm mb-2">{`Reply in ${mapFrequencyToLabel(emailConnected.frequency)}`}</CardDescription>
+                                        {emailConnected.frequency && <CardDescription className="text-sm mb-2">{`Reply in ${mapFrequencyToLabel(emailConnected.frequency)}`}</CardDescription>}
                                         <div className="flex justify-between items-center text-xs text-muted-foreground mb-2">
                                             <p>Added on {format(new Date(emailConnected.createdAt), "PPP")}</p>
                                             {/* {emailConnected.purpose && <Badge variant="background" className="w-fit">{emailConnected.purpose}</Badge>} */}

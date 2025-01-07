@@ -178,7 +178,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.free,
         title: "Free",
-        description: "Get started for free",
+        description: "Test AI workflows on small-scale email queries. Perfect for individuals exploring automation.",
         price: {
             monthly: 0,
             yearly: 0,
@@ -202,10 +202,10 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.hobby,
         title: "Hobby",
-        description: "Everything in Free, plus...",
+        description: "Manage moderate email workflows for small teams or basic CRM tasks with ease.",
         price: {
-            monthly: 19,
-            yearly: 190,
+            monthly: 9,
+            yearly: 99,
         },
         currency: {
             code: "USD",
@@ -230,10 +230,10 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.standard,
         title: "Standard",
-        description: "Everything in Hobby, plus...",
+        description: "Streamline email workflows for mid-sized teams handling customer support or CRM.",
         price: {
-            monthly: 99,
-            yearly: 990,
+            monthly: 29,
+            yearly: 299,
         },
         currency: {
             code: "USD",
@@ -258,7 +258,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.unlimited,
         title: "Unlimited",
-        description: "Everything in Standard, plus...",
+        description: "Built for large teams managing high-volume email workflows for CRM or operations.",
         price: {
             monthly: 399,
             yearly: 3990,
