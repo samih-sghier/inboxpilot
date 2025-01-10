@@ -17,8 +17,7 @@ export function Promotion() {
                 as="p"
                 className="text-center text-base leading-relaxed text-white/90 sm:text-xl"
             >
-                Let AI handle your routine emails while you focus on what matters.
-                Smart, instant responses that sound just like you.
+                Set up the AI to either draft responses for your review or send them directly allowing you to focus on important tasks while it handles queries around the clock.
             </Balancer>
 
             <Link href={siteUrls.auth.signup}>

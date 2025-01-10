@@ -28,7 +28,7 @@ const steps = [
     },
     {
         number: 4,
-        title: "24/7 Auto-Responses",
+        title: "24/7 Auto-Responses, or Drafts for review",
         description:
             "Let the AI handle queries round the clock while you focus on important tasks",
         icon: Clock, // Replaced Coffee with Clock icon
