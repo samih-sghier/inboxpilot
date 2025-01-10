@@ -38,7 +38,7 @@ const credential = new ClientSecretCredential(
 export async function authorizeOutlook(metadata) {
     const authUrl = app.getAuthCodeUrl({
         redirectUri,
-        scopes: ["User.Read", "Mail.Read", "Mail.Send", "offline_access"],
+        scopes: ["User.Read", "Mail.ReadWrite", "Mail.Send", "offline_access"],
         state: JSON.stringify(metadata),
         prompt: "select_account",
 
@@ -56,7 +56,7 @@ export async function handleOAuthCallbackMutation({ code, state }: { code: strin
         const tokenResponse = await app.acquireTokenByCode({
             code,
             redirectUri,
-            scopes: ["User.Read", "Mail.Read", "Mail.Send", "offline_access"],
+            scopes: ["User.Read", "Mail.ReadWrite", "Mail.Send", "offline_access"],
         });
         
         const accessToken = tokenResponse.accessToken;
