@@ -34,6 +34,7 @@ const gmail = google.gmail({ version: 'v1', auth: oauth2Client });
 export interface MetaData {
     orgId: string,
     frequency: number,
+    sendMode: string,
     purpose: string,
     provider: string
 
@@ -73,6 +74,7 @@ export async function handleOAuthCallbackMutation({ code, state }: { code: strin
             provider: metadata.provider,
             expires_at: tokens.expiry_date ? Math.floor(tokens.expiry_date / 10000) : undefined,
             frequency: +metadata.frequency || undefined,
+            sendMode: metadata.sendMode || 'draft',
             isActive: true,
             historyId: watchResponse.historyId || -1,
             expiration: BigInt(watchResponse.expiration || 0),

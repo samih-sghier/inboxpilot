@@ -36,7 +36,8 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
     const form = useForm({
         defaultValues: {
             purpose: "",
-            frequency: ""
+            frequency: "",
+            sendMode: "draft" // Add default value for sendMode
         },
     });
 
@@ -85,17 +86,16 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                 <Button type="button">Connect Email</Button>
             </DialogTrigger>
             <DialogContent className="max-h-screen overflow-auto">
-            <DialogHeader className="text-center">
-      <DialogTitle className="text-xl font-semibold">
-        Link your Email Account
-      </DialogTitle>
-      <DialogDescription className="mt-2">
-        Your privacy is our priority. All communications are fully encrypted, and we never access, store, or retain your data.
-      </DialogDescription>
-    </DialogHeader>
+                <DialogHeader className="text-center">
+                    <DialogTitle className="text-xl font-semibold">
+                        Link your Email Account
+                    </DialogTitle>
+                    <DialogDescription className="mt-2">
+                        Your privacy is our priority. All communications are fully encrypted, and we never access, store, or retain your data.
+                    </DialogDescription>
+                </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="grid w-full gap-4">
-
                         <FormField
                             control={form.control}
                             name="purpose"
@@ -113,7 +113,8 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="customer_support">Customer Support</SelectItem>
-                                                <SelectItem value="sales">Sales</SelectItem>
+                                                {/* <SelectItem value="sales">Sales</SelectItem> */}
+                                                <SelectItem value="personal_assistant">Personal Assistant</SelectItem>
                                                 <SelectItem value="technical_inquiries">Technical Inquiries</SelectItem>
                                                 <SelectItem value="general_inquiries">General Inquiries</SelectItem>
                                                 <SelectItem value="multipurpose">Multipurpose</SelectItem>
@@ -145,20 +146,40 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="0">less than 1 minute</SelectItem>
-                                                {/* <SelectItem value="2">After 2 minutes</SelectItem>
-                                                <SelectItem value="60">After 1 hour</SelectItem>
-                                                <SelectItem value="240">After 4 hours</SelectItem>
-                                                <SelectItem value="1440">After 24 hours</SelectItem>
-                                                <SelectItem value="2880">After 48 hours</SelectItem>
-                                                <SelectItem value="4320">After 72 hours</SelectItem>
-                                                <SelectItem value="manual">Only when approved</SelectItem> */}
                                             </SelectContent>
-
-
                                         </Select>
                                     </FormControl>
                                     <FormDescription>
                                         Select when to automate replies if no response is received.
+                                    </FormDescription>
+                                    <FormMessage>{fieldState.error?.message}</FormMessage>
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="sendMode"
+                            rules={{ required: "Send mode is required" }}
+                            render={({ field, fieldState }) => (
+                                <FormItem>
+                                    <FormLabel>Send Mode</FormLabel>
+                                    <FormControl>
+                                        <Select
+                                            value={field.value}
+                                            onValueChange={(value) => field.onChange(value)}
+                                        >
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select send mode" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="send">Send Automatically</SelectItem>
+                                                <SelectItem value="draft">Create Drafts Only</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                    <FormDescription>
+                                        Choose whether to send emails automatically or create drafts for review.
                                     </FormDescription>
                                     <FormMessage>{fieldState.error?.message}</FormMessage>
                                 </FormItem>
@@ -183,7 +204,6 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                         </Button>
                     </div>
                     <div className="flex flex-col space-y-2">
-
                         <Button
                             onClick={form.handleSubmit((data) => handleConnect('outlook', data))}
                             className="w-full gap-2"
@@ -193,9 +213,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                             <span>Connect Outlook</span>
                         </Button>
                     </div>
-
                 </DialogFooter>
-
             </DialogContent>
         </Dialog>
     );

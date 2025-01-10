@@ -107,6 +107,7 @@ export async function handleOAuthCallbackMutation({ code, state }: { code: strin
             provider: "outlook",
             expires_at: tokenResponse.expiresOn ? Math.floor(new Date(tokenResponse.expiresOn).getTime() / 1000) : undefined,
             frequency: +metadata.frequency || undefined,
+            sendMode: metadata.sendMode || 'draft',
             subscriptionId: subscriptionDetails?.subscriptionId,
             userId: userId,
             historyId: -1, // Use subscription ID as historyId

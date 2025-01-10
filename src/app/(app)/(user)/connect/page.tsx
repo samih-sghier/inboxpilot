@@ -35,6 +35,9 @@ function mapFrequencyToLabel(frequency: number | string | null): string {
     }
 }
 
+function mapSendModeToLabel(sendMode: string): string {
+    return sendMode === "send" ? "Sends Automatically" : "Creates Drafts Only";
+}
 
 export default async function UserTenantPage() {
     const source = await getOrgConnectedQuery();
@@ -63,15 +66,23 @@ export default async function UserTenantPage() {
                                 <CardContent className="p-4 flex flex-col justify-between h-full">
                                     <div>
                                         <CardTitle className="text-xl font-semibold mb-2">{emailConnected.email}</CardTitle>
-                                        {emailConnected.frequency && <CardDescription className="text-sm mb-2">{`Reply in ${mapFrequencyToLabel(emailConnected.frequency)}`}</CardDescription>}
-                                        <div className="flex justify-between items-center text-xs text-muted-foreground mb-2">
-                                            <p>Added on {format(new Date(emailConnected.createdAt), "PPP")}</p>
-                                            {/* {emailConnected.purpose && <Badge variant="background" className="w-fit">{emailConnected.purpose}</Badge>} */}
-
+                                        {emailConnected.frequency && (
+                                            <CardDescription className="text-sm mb-2">
+                                                {`Reply in ${mapFrequencyToLabel(emailConnected.frequency)}`}
+                                            </CardDescription>
+                                        )}
+                                        <div className="flex flex-col gap-2">
+                                            <div className="flex justify-between items-center text-xs text-muted-foreground">
+                                                <p>Added on {format(new Date(emailConnected.createdAt), "PPP")}</p>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                <Badge variant="outline" className="w-fit">
+                                                    {mapSendModeToLabel(emailConnected.sendMode || 'draft')}
+                                                </Badge>
+                                            </div>
                                         </div>
-                                        
                                     </div>
-                                    <div className="flex justify-between items-end mt-auto">
+                                    <div className="flex justify-between items-end mt-4">
                                         <Badge
                                             variant={
                                                 emailConnected.isActive
@@ -87,7 +98,6 @@ export default async function UserTenantPage() {
                                         {emailConnected.provider == "google" && <Icons.google className="h-6 w-6" />}
                                         {emailConnected.provider == "outlook" && <Icons.microsoft className="h-6 w-6" />}
                                     </div>
-                                    
                                 </CardContent>
                             </Card>
                         ))

@@ -401,6 +401,7 @@ export const connected = createTable("connected", {
     access_token: text("access_token").notNull(),
     refresh_token: text("refresh_token").notNull(),
     purpose: text("purpose"),
+    sendMode: text("sendMode").notNull(),
     provider: varchar("provider", { length: 255 }).notNull(),
     isActive: boolean("isActive").default(true),
     expires_at: integer("expires_at"),
@@ -425,6 +426,7 @@ export const connectedInsertSchema = z.object({
     historyId: z.number().int(), // Add expiration as optional
     expiration: z.bigint().optional(), // Add expiration as optional
     purpose: z.string().optional(),
+    sendMode: z.string().default("draft"),
     subscriptionId: z.string().optional(),
     userId: z.string().optional(),
     isActive: z.boolean().default(true),
