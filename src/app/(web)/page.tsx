@@ -61,7 +61,7 @@ export default async function HomePage() {
                     </Link> */}
 
                     <Link
-                        href={siteUrls.auth.login}
+                        href={siteUrls.auth.signup}
                         className={buttonVariants({
                             className: "bg-gradient-to-r from-[#807280] via-[#5C4A5B] to-[#603060] text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-300"
                         })}
