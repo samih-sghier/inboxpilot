@@ -20,7 +20,7 @@ export async function getDashboardInfo() {
             connectedEmails: 0,
             connectedEmailsGrowth: 0,
             sources: 0,
-            scheduledEmails: 0,
+            draftedEmails: 0,
             // avgResponseTimeChange: 0,
             overLimit: false,
             alerts: 0,
@@ -34,9 +34,27 @@ export async function getDashboardInfo() {
     const emailsSent = await db
         .select({ count: count() })
         .from(emailLogs)
-        .where(eq(emailLogs.orgId, organizationId))
+        .where(
+            and(
+                eq(emailLogs.orgId, organizationId),
+                eq(emailLogs.status, "sent")
+            )
+        )
         .execute()
         .then(res => res[0]?.count ?? 0);
+
+    const emailsDrafted = await db
+        .select({ count: count() })
+        .from(emailLogs)
+        .where(
+            and(
+                eq(emailLogs.orgId, organizationId),
+                eq(emailLogs.status, "draft")
+            )
+        )
+        .execute()
+        .then(res => res[0]?.count ?? 0);
+
 
     const activeUsers = await db
         .select({ count: count() })
@@ -89,7 +107,7 @@ export async function getDashboardInfo() {
         connectedEmails,
         connectedEmailsGrowth: 0, // Placeholder
         sources: sourcesNotNull, // Placeholder
-        scheduledEmails: 0, // Placeholder
+        draftedEmails: emailsDrafted, // Placeholder
         overLimit: tokenUsage >= maxTokens,
         alerts, // Placeholder
         apiUsage: `${formatNumber(tokenUsage)} / ${formatNumber(maxTokens)}`, // Use the new formatNumber function

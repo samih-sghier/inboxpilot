@@ -35,6 +35,23 @@ function mapFrequencyToLabel(frequency: number | string | null): string {
     }
 }
 
+function mapPurposeToLabel(purpose: string): string {
+    switch (purpose) {
+        case "support":
+            return "Customer Support";
+        case "sales":
+            return "Sales Team";
+        case "marketing":
+            return "Marketing";
+        case "recruitment":
+            return "Recruitment";
+        case "general":
+            return "General Communication";
+        default:
+            return purpose;
+    }
+}
+
 function mapSendModeToLabel(sendMode: string): string {
     return sendMode === "send" ? "Sends Automatically" : "Creates Drafts Only";
 }
@@ -64,39 +81,48 @@ export default async function UserTenantPage() {
                             <Card key={emailConnected.email} className="relative shadow-md">
                                 <ConnectedEmailsDropdown {...emailConnected} />
                                 <CardContent className="p-4 flex flex-col justify-between h-full">
-                                    <div>
-                                        <CardTitle className="text-xl font-semibold mb-2">{emailConnected.email}</CardTitle>
-                                        {emailConnected.frequency && (
-                                            <CardDescription className="text-sm mb-2">
-                                                {`Reply in ${mapFrequencyToLabel(emailConnected.frequency)}`}
-                                            </CardDescription>
-                                        )}
-                                        <div className="flex flex-col gap-2">
-                                            <div className="flex justify-between items-center text-xs text-muted-foreground">
-                                                <p>Added on {format(new Date(emailConnected.createdAt), "PPP")}</p>
-                                            </div>
-                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                                <Badge variant="outline" className="w-fit">
-                                                    {mapSendModeToLabel(emailConnected.sendMode || 'draft')}
+                                    <div className="space-y-4">
+                                        <div>
+                                            <CardTitle className="text-xl font-semibold mb-1">{emailConnected.email}</CardTitle>
+                                            <div className="flex items-center gap-2">
+                                                {emailConnected.provider == "google" && <Icons.google className="h-4 w-4" />}
+                                                {emailConnected.provider == "outlook" && <Icons.microsoft className="h-4 w-4" />}
+                                                <Badge variant="outline" className="text-xs">
+                                                    {mapPurposeToLabel(emailConnected.purpose)}
                                                 </Badge>
                                             </div>
                                         </div>
+
+                                        <div className="space-y-2">
+                                            <div className="flex items-center gap-2">
+                                                <Icons.clock className="h-4 w-4 text-muted-foreground" />
+                                                <span className="text-sm text-muted-foreground">
+                                                    {`Reply in ${mapFrequencyToLabel(emailConnected.frequency)}`}
+                                                </span>
+                                            </div>
+                                            
+                                            <div className="flex items-center gap-2">
+                                                <Icons.calendar className="h-4 w-4 text-muted-foreground" />
+                                                <span className="text-xs text-muted-foreground">
+                                                    Added on {format(new Date(emailConnected.createdAt), "PPP")}
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex justify-between items-end mt-4">
+
+                                    <div className="flex justify-between items-center mt-4 pt-4 border-t">
                                         <Badge
-                                            variant={
-                                                emailConnected.isActive
-                                                    ? "success"
-                                                    : !emailConnected.isActive
-                                                        ? "destructive"
-                                                        : "info"
-                                            }
+                                            variant={emailConnected.isActive ? "success" : "destructive"}
                                             className="w-fit"
                                         >
                                             {emailConnected.isActive ? "active" : "disconnected"}
                                         </Badge>
-                                        {emailConnected.provider == "google" && <Icons.google className="h-6 w-6" />}
-                                        {emailConnected.provider == "outlook" && <Icons.microsoft className="h-6 w-6" />}
+                                        <Badge 
+                                            variant="outline" 
+                                            className="w-fit"
+                                        >
+                                            {mapSendModeToLabel(emailConnected.sendMode || 'draft')}
+                                        </Badge>
                                     </div>
                                 </CardContent>
                             </Card>

@@ -36,7 +36,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
     const form = useForm({
         defaultValues: {
             purpose: "",
-            frequency: "",
+            // frequency: "",
             sendMode: "draft" // Add default value for sendMode
         },
     });
@@ -129,7 +129,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                             )}
                         />
 
-                        <FormField
+                        {/* <FormField
                             control={form.control}
                             name="frequency"
                             rules={{ required: "Frequency is required" }}
@@ -155,7 +155,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                     <FormMessage>{fieldState.error?.message}</FormMessage>
                                 </FormItem>
                             )}
-                        />
+                        /> */}
 
                         <FormField
                             control={form.control}
