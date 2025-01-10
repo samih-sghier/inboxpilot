@@ -85,29 +85,24 @@ export default async function UserTenantPage() {
                                         <div>
                                             <CardTitle className="text-xl font-semibold mb-1">{emailConnected.email}</CardTitle>
                                             <div className="flex items-center gap-2">
-                                                {emailConnected.provider == "google" && <Icons.google className="h-4 w-4" />}
-                                                {emailConnected.provider == "outlook" && <Icons.microsoft className="h-4 w-4" />}
+
                                                 <Badge variant="outline" className="text-xs">
-                                                    {mapPurposeToLabel(emailConnected.purpose)}
+                                                    {mapPurposeToLabel(emailConnected?.purpose)}
                                                 </Badge>
                                             </div>
                                         </div>
 
-                                        <div className="space-y-2">
+                                        <div className="flex items-center justify-between gap-2">
                                             <div className="flex items-center gap-2">
-                                                <Icons.clock className="h-4 w-4 text-muted-foreground" />
-                                                <span className="text-sm text-muted-foreground">
-                                                    {`Reply in ${mapFrequencyToLabel(emailConnected.frequency)}`}
-                                                </span>
-                                            </div>
-                                            
-                                            <div className="flex items-center gap-2">
-                                                <Icons.calendar className="h-4 w-4 text-muted-foreground" />
                                                 <span className="text-xs text-muted-foreground">
-                                                    Added on {format(new Date(emailConnected.createdAt), "PPP")}
+                                                    Added on {format(new Date(emailConnected?.createdAt), "PPP")}
                                                 </span>
                                             </div>
+
+                                            {emailConnected.provider === "google" && <Icons.google className="h-4 w-4" />}
+                                            {emailConnected.provider === "outlook" && <Icons.microsoft className="h-4 w-4" />}
                                         </div>
+
                                     </div>
 
                                     <div className="flex justify-between items-center mt-4 pt-4 border-t">
@@ -117,8 +112,8 @@ export default async function UserTenantPage() {
                                         >
                                             {emailConnected.isActive ? "active" : "disconnected"}
                                         </Badge>
-                                        <Badge 
-                                            variant="outline" 
+                                        <Badge
+                                            variant="outline"
                                             className="w-fit"
                                         >
                                             {mapSendModeToLabel(emailConnected.sendMode || 'draft')}
