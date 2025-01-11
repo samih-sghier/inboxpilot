@@ -22,7 +22,7 @@ export default async function UserPropertyPage() {
         >
             <div className="flex flex-col lg:flex-row lg:space-x-4">
                 <div className="flex-1">
-                    <TabsSection source={source} subscription={subscription ? subscription.plan : freePricingPlan} stats={stats} />
+                    <TabsSection source={source || {}} subscription={subscription ? subscription.plan : freePricingPlan} stats={stats} />
                 </div>
                 <div className="mt-4 lg:mt-0 lg:w-1/4">
                     <SourcesCard stats={stats} subscription={subscription} dataSources={source} />

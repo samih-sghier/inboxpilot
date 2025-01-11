@@ -46,6 +46,7 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
     const [discoveredLinks, setDiscoveredLinks] = useState<string[]>([]);
 
     useEffect(() => {
+
         if (source?.website_data) {
             const initialLinks = Object.entries(source.website_data).map(([url, llmData], index) => ({
                 id: index + 1,
@@ -131,8 +132,8 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
             setLinks(prevLinks => [...prevLinks, newLinkEntry]);
             setTotalChars(prev => prev + (content?.length || 0));
-
-            const websiteDataUpdate = { ...source.website_data, [urlToValidate]: content };
+            const websiteData = source.website_data || {};
+            const websiteDataUpdate = { ...websiteData, [urlToValidate]: content };
             onSourceChange({ ...source, website_data: websiteDataUpdate });
             await updateWebsiteDataField(websiteDataUpdate);
 
