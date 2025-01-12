@@ -114,7 +114,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                             <SelectContent>
                                                 <SelectItem value="customer_support">Customer Support</SelectItem>
                                                 {/* <SelectItem value="sales">Sales</SelectItem> */}
-                                                <SelectItem value="personal_assistant">Personal Assistant</SelectItem>
+                                                {/* <SelectItem value="personal_assistant">Personal Assistant</SelectItem> */}
                                                 <SelectItem value="technical_inquiries">Technical Inquiries</SelectItem>
                                                 <SelectItem value="security_operations">Security Operations</SelectItem>
                                                 <SelectItem value="multipurpose">Multipurpose</SelectItem>
