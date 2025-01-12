@@ -7,34 +7,34 @@ import { Fragment } from "react";
 
 export async function HeaderAuth() {
     const user = await getUser();
-    
+
+    if (user) {
+        return (
+            <Link
+                href={siteUrls.dashboard.home}
+                className={buttonVariants({
+                    className: "flex items-center space-x-1",
+                })}
+            >
+                <span>Dashboard</span>
+            </Link>
+        );
+    }
+
     return (
-        <section className="flex items-center space-x-2">
-            {user ? (
-                <Link
-                    href={siteUrls.dashboard.home}
-                    className={buttonVariants({
-                        className: "flex items-center space-x-1",
-                    })}
-                >
-                    <span>Dashboard</span>
-                </Link>
-            ) : (
-                <Fragment>
-                    <Link
-                        href={siteUrls.auth.signup}
-                        className={buttonVariants({
-                            className: "flex items-center space-x-1",
-                        })}
-                    >
-                        <span>Try it out</span>
-                        <span className="font-light italic">
-                            {" "}
-                            — it&apos;s free
-                        </span>
-                    </Link>
-                </Fragment>
-            )}
-        </section>
+        <Link
+            href={siteUrls.auth.signup}
+            className={buttonVariants({
+                className: "flex items-center space-x-1",
+            })}
+            prefetch={true}
+        >
+            <span>Try it out</span>
+            <span className="font-light italic">
+                {" "}
+                — it&apos;s free
+            </span>
+        </Link>
     );
 }
+
