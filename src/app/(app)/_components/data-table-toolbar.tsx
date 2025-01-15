@@ -12,17 +12,20 @@ import type {
     DataTableFilterableColumn,
     DataTableSearchableColumn,
 } from "@/types/data-table";
+import ClearAllLogsDropdown from "../(user)/logs/_components/clear-logs";
 
 interface DataTableToolbarProps<TData> {
     table: Table<TData>;
     filterableColumns?: DataTableFilterableColumn<TData>[];
     searchableColumns?: DataTableSearchableColumn<TData>[];
+    type?: "logs" | "escalations";
 }
 
 export function DataTableToolbar<TData>({
     table,
     filterableColumns = [],
     searchableColumns = [],
+    type
 }: DataTableToolbarProps<TData>) {
     const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -101,6 +104,7 @@ export function DataTableToolbar<TData>({
                 )} */}
             </div>
             <DataTableViewOptions table={table} />
+            {type && <ClearAllLogsDropdown type={type} />}
         </div>
     );
 }

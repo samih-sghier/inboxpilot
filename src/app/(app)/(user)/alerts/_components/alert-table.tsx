@@ -95,6 +95,7 @@ export function AlertTable({ watchListPromise }: AlertTableProps) {
                 filterableColumns={filterableColumns}
                 searchableColumns={searchableColumns}
                 totalRows={total}
+                type="escalations"
             />
         </>
     );

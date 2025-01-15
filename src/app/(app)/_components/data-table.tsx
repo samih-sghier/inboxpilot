@@ -31,6 +31,7 @@ type DataTableProps<TData, TValue> = {
     totalRows: number;
     filterableColumns?: DataTableFilterableColumn<TData>[];
     searchableColumns?: DataTableSearchableColumn<TData>[];
+    type?: "logs" | "escalations";
 };
 
 export function DataTable<TData, TValue>({
@@ -39,6 +40,7 @@ export function DataTable<TData, TValue>({
     totalRows,
     searchableColumns = [],
     filterableColumns = [],
+    type
 }: DataTableProps<TData, TValue>) {
     return (
         <div className="space-y-4">
@@ -46,6 +48,7 @@ export function DataTable<TData, TValue>({
                 table={table}
                 filterableColumns={filterableColumns}
                 searchableColumns={searchableColumns}
+                type={type}
             />
             <div className="flex-shrink rounded-md border border-border bg-background">
                 <Table>

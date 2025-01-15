@@ -10,6 +10,7 @@ import type {
     DataTableSearchableColumn,
 } from "@/types/data-table";
 import { type getAllPaginatedEmailLogsQuery } from "@/server/actions/logs/queries";
+import { ClearAllLogsDropdown } from "./clear-logs";
 
 type EmailLogsTableProps = {
     emailLogsPromise: ReturnType<typeof getAllPaginatedEmailLogsQuery>;
@@ -31,7 +32,7 @@ const filterableColumns: DataTableFilterableColumn<EmailLogData>[] = [
             { label: "Sent", value: "sent" },
             { label: "Failed", value: "failed" },
             { label: "Draft", value: "draft" },
-            { label: "Scheduled", value: "scheduled" },
+            // { label: "Scheduled", value: "scheduled" },
         ],
     },
 ];
@@ -76,6 +77,7 @@ export function EmailLogsTable({ emailLogsPromise }: EmailLogsTableProps) {
                 filterableColumns={filterableColumns}
                 searchableColumns={searchableColumns}
                 totalRows={total}
+                type="logs"
             />
         </>
     );
