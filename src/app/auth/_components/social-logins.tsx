@@ -39,6 +39,8 @@ export function SocialLogins() {
             await signIn("google", {
                 callbackUrl: siteUrls.dashboard.home,
                 redirect: true,
+            }, {
+                prompt: 'consent', // Force the Google consent screen to appear
             });
         } catch (error) {
             toast.error("An error occurred. Please try again later.");

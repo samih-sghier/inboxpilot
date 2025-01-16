@@ -40,11 +40,6 @@ const navigation: UserDropdownNavItems[] = [
         label: "Profile",
         items: [
             {
-                label: "Dashboard",
-                icon: LayoutDashboardIcon,
-                href: siteUrls.dashboard.home,
-            },
-            {
                 label: "Settings",
                 icon: Settings2Icon,
                 href: siteUrls.profile.settings,

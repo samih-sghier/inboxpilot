@@ -37,10 +37,18 @@ function mapFrequencyToLabel(frequency: number | string | null): string {
 
 function mapPurposeToLabel(purpose: string): string {
     switch (purpose) {
-        case "support":
+        case "customer_support":
             return "Customer Support";
         case "sales":
             return "Sales Team";
+        case "personal_assistant":
+            return "Personal Assistant";
+        case "technical_inquiries":
+            return "Technical Inquiries";
+        case "security_operations":
+            return "Security Operations";
+        case "multipurpose":
+            return "Multipurpose";
         case "marketing":
             return "Marketing";
         case "recruitment":
@@ -48,9 +56,10 @@ function mapPurposeToLabel(purpose: string): string {
         case "general":
             return "General Communication";
         default:
-            return purpose;
+            return purpose; // if purpose is not in the list, return the string itself
     }
 }
+
 
 function mapSendModeToLabel(sendMode: string): string {
     return sendMode === "send" ? "Sends Automatically" : "Creates Drafts Only";

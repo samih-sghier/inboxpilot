@@ -120,6 +120,7 @@ export async function getOrgSubscription() {
         await protectedProcedure();
 
         const { currentOrg } = await getOrganizations();
+        if (!currentOrg) return null;
 
         const orgSubscription = await db.query.subscriptions.findFirst({
             where: eq(subscriptions.orgId, currentOrg.id),

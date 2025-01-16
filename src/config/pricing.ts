@@ -63,7 +63,7 @@ export const pricingIds = {
 export const pricingFeatures: PricingFeature[] = [
     {
         id: "1",
-        title: "Access to GPT-4o mini model",
+        title: "Access to mini AI model",
         includedIn: [pricingIds.free],
     },
     {
@@ -158,17 +158,17 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "20",
-        title: "Limited to 100 links to train on",
+        title: "Up to 100 links to train on",
         includedIn: [pricingIds.hobby],
     },
     {
         id: "21",
-        title: "Limited to 500 links to train on",
+        title: "Up to 500 links to train on",
         includedIn: [pricingIds.standard],
     },
     {
         id: "22",
-        title: "Limited to 1000 links to train on",
+        title: "Up to 1000 links to train on",
         includedIn: [pricingIds.unlimited],
     },
     // {
@@ -219,8 +219,8 @@ export const pricingPlans: PricingPlan[] = [
         title: "Hobby",
         description: "Manage moderate email workflows for small teams or basic CRM tasks with ease.",
         price: {
-            monthly: 9,
-            yearly: 99,
+            monthly: 19,
+            yearly: 190,
         },
         currency: {
             code: "USD",
@@ -247,8 +247,8 @@ export const pricingPlans: PricingPlan[] = [
         title: "Standard",
         description: "Streamline email workflows for mid-sized teams handling customer support or CRM.",
         price: {
-            monthly: 29,
-            yearly: 299,
+            monthly: 99,
+            yearly: 990,
         },
         currency: {
             code: "USD",
