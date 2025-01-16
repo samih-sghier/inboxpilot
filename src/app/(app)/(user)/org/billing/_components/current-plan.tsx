@@ -17,6 +17,8 @@ type CurrentPlanProps = {
 };
 
 export function CurrentPlan({ subscription }: CurrentPlanProps) {
+    const isArchivedPlan = subscription && !subscription.plan?.title;
+
     return (
         <Card>
             <CardHeader>
@@ -26,11 +28,22 @@ export function CurrentPlan({ subscription }: CurrentPlanProps) {
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
+                {isArchivedPlan && (
+                    <div className="rounded-md border border-yellow-200 bg-yellow-100 p-3">
+                        <p className="text-sm text-yellow-900">
+                            This plan has been archived due to a price change. Your plan is still active, and you will continue to be billed at your original subscription price.
+                        </p>
+                    </div>
+                )}
+
+
                 <div className="space-y-1">
                     <div className="flex items-center gap-2">
                         <p>
                             <span className="font-semibold">Plan:</span>{" "}
-                            {subscription ? subscription.plan?.title : "Free"}
+                            {isArchivedPlan ?
+                                "Archived Price"
+                                : (subscription ? subscription.plan?.title : "Free")}
                         </p>
 
                         {subscription?.status && (
@@ -44,18 +57,17 @@ export function CurrentPlan({ subscription }: CurrentPlanProps) {
                             <>
                                 {subscription.status === "active" &&
                                     "Renews at " +
-                                        format(subscription.renews_at, "PP")}
+                                    format(subscription.renews_at, "PP")}
 
                                 {subscription.status === "paused" &&
                                     "Your subscription is paused"}
 
                                 {subscription.status === "canceled" &&
                                     subscription.ends_at &&
-                                    `${
-                                        new Date(subscription.ends_at) >
+                                    `${new Date(subscription.ends_at) >
                                         new Date()
-                                            ? "Ends at "
-                                            : "Ended on "
+                                        ? "Ends at "
+                                        : "Ended on "
                                     }` + format(subscription.ends_at, "PP")}
                             </>
                         ) : (
