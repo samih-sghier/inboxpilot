@@ -158,16 +158,31 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "20",
-        title: "Unlimited links to train on",
-        includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
+        title: "Limited to 100 links to train on",
+        includedIn: [pricingIds.hobby],
     },
     {
         id: "21",
+        title: "Limited to 500 links to train on",
+        includedIn: [pricingIds.standard],
+    },
+    {
+        id: "22",
+        title: "Limited to 1000 links to train on",
+        includedIn: [pricingIds.unlimited],
+    },
+    // {
+    //     id: "23",
+    //     title: "Unlimited links to train on",
+    //     includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
+    // },
+    {
+        id: "24",
         title: "Capture Email Escalations",
         includedIn: [pricingIds.free, pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
     },
     {
-        id: "22",
+        id: "25",
         title: "Remove 'Powered by InboxPilot'",
         includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
     }
@@ -221,7 +236,7 @@ export const pricingPlans: PricingPlan[] = [
         chatbots: 2,
         charactersPerChatbot: 5000000,
         teamMembers: 1,
-        links: Infinity,
+        links: 100,
         priceId: {
             monthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_HOBBY_MONTHLY ?? "",
             yearly: process.env.NEXT_PUBLIC_STRIPE_PRICE_HOBBY_YEARLY ?? ""
@@ -249,7 +264,7 @@ export const pricingPlans: PricingPlan[] = [
         chatbots: 10,
         charactersPerChatbot: 11000000,
         teamMembers: 3,
-        links: Infinity,
+        links: 1000,
         priceId: {
             monthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_STANDARD_MONTHLY ?? "",
             yearly: process.env.NEXT_PUBLIC_STRIPE_PRICE_STANDARD_YEARLY ?? ""
@@ -277,7 +292,7 @@ export const pricingPlans: PricingPlan[] = [
         chatbots: 50,
         charactersPerChatbot: 20000000,
         teamMembers: 5,
-        links: Infinity,
+        links: 1000,
         priceId: {
             monthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_UNLIMITED_MONTHLY ?? "",
             yearly: process.env.NEXT_PUBLIC_STRIPE_PRICE_UNLIMITED_YEARLY ?? ""
