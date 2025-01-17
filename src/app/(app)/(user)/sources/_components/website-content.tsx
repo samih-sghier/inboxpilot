@@ -292,8 +292,11 @@ export default function WebsiteContent({ source, stats, subscription, onSourceCh
 
             // Listen for when the crawl is done
             watch.addEventListener("done", (state) => {
-                console.log("Crawl Done:", state.detail.status);
-                toast.success(`Crawl completed; ${processedCount} links scrapped`);
+                if (subscription.title === "Free") {
+                    toast.info(`Crawl completed. Your plan allows only ${subscription.links} links. Upgrade for more.`);
+                } else {
+                    toast.success(`Crawl completed. Scraped ${processedCount} links.`);
+                }
                 setFetching(false);
 
             });
