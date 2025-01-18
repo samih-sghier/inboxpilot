@@ -11,7 +11,7 @@ export const env = createEnv({
             .string()
             .url()
             .refine(
-                (str) => !str.includes("postgresql://samihsghier:@Rabat1995@localhost:5432/sg"),
+                (str) => !str.includes("postgresql://@localhost:5432/sg"),
                 "You forgot to change the default URL",
             ),
         NODE_ENV: z
