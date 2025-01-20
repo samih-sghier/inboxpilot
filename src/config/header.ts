@@ -76,7 +76,7 @@ export const companyFooterNavigation: NavigationItem[] = [
     },
     {
         id: "careers",
-        href: 'https://x.com/inboxpilot',
+        href: 'https://www.linkedin.com/company/inboxpilot',
         label: "Careers",
     },
 ];
