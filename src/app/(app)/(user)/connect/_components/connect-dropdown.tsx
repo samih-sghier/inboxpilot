@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import type { z } from "zod";
 import { connectedSelectSchema } from "@/server/db/schema"; // Update this import path as needed
 import { authorizeGmailMutationSend, removeConnectedItemMutation } from "@/server/actions/gmail/mutations";
+import { prop } from "node_modules/cheerio/dist/esm/api/attributes";
 
 type ConnectedEmailDropdownProps = z.infer<typeof connectedSelectSchema>;
 
@@ -89,13 +90,14 @@ export function ConnectedEmailsDropdown(props: ConnectedEmailDropdownProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-screen max-w-[12rem]">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem
-                    disabled={isReconnecting}
-                    onClick={handleReconnectEmail}
-                >
-                    Reconnect
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                {!props.isActive &&
+                    <DropdownMenuItem
+                        disabled={isReconnecting}
+                        onClick={handleReconnectEmail}
+                    >
+                        Reconnect
+                    </DropdownMenuItem>}
+                {!props.isActive && <DropdownMenuSeparator />}
 
                 <DropdownMenuItem
                     disabled={isRemoveConnectedEmailPending}
