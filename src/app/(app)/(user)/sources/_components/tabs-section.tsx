@@ -38,7 +38,7 @@ export function TabsSection({ source, subscription, stats }: { source: any, subs
                     style={{ backgroundColor: 'var(--tab-bg-default)' }}
                 >
                     <BookTextIcon className="text-lg" />
-                    <span className="ml-2">Special Instructions</span>
+                    <span className="ml-2">Text</span>
                     <div
                         className={`absolute bottom-0 left-0 w-full h-1 bg-primary transition-transform transform ${activeTab === "text" ? "scale-x-100" : "scale-x-0"} origin-left`}
                     />

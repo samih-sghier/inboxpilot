@@ -63,12 +63,12 @@ export const pricingIds = {
 export const pricingFeatures: PricingFeature[] = [
     {
         id: "1",
-        title: "Access to latest mini LLM models",
+        title: "Access to latest mini models",
         includedIn: [pricingIds.free],
     },
     {
         id: "2",
-        title: "Access to latest LLM models",
+        title: "Access to latest models",
         includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
     },
     {

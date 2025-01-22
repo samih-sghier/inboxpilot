@@ -130,7 +130,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                             onValueChange={(value) => field.onChange(value)}
                                         >
                                             <SelectTrigger>
-                                                <SelectValue placeholder="Select send mode" />
+                                                <SelectValue placeholder="Select Mode" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="send">Send Automatically</SelectItem>

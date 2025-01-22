@@ -66,7 +66,7 @@ export function TextContent({ source, subscription, stats, onSourceChange }: { s
                             <FormLabel>Text</FormLabel>
                             <FormControl>
                                 <Textarea
-                                    placeholder="Enter additional instructions that you want your AI Agent to follow..."
+                                    placeholder="Enter additional data text..."
                                     {...field}
                                     value={field.value || ""}
                                     className="h-80 w-full resize-none" // Increased height
