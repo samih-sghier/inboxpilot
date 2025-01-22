@@ -98,6 +98,16 @@ export default async function UserTenantPage() {
                                                 <Badge variant="outline" className="text-xs">
                                                     {mapPurposeToLabel(emailConnected?.purpose)}
                                                 </Badge>
+
+                                                {emailConnected.reveal_ai ? (
+                                                    <Badge variant="outline" className="text-xs text-green-600">
+                                                        Disclose AI
+                                                    </Badge>
+                                                ) : (
+                                                    <Badge variant="outline" className="text-xs text-blue-600">
+                                                        No AI Disclosure
+                                                    </Badge>
+                                                )}
                                             </div>
                                         </div>
 

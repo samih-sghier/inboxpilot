@@ -11,6 +11,7 @@ import { ConfidentialClientApplication } from "@azure/msal-node";
 import { getOrganizations } from '../organization/queries';
 import { ClientSecretCredential } from "@azure/identity";
 import { headers } from 'next/headers';
+import { prop } from 'node_modules/cheerio/dist/esm/api/attributes';
 
 
 const REDIRECT_URI = `${env.NEXTAUTH_URL}/api/outlook/authorize`;
@@ -108,6 +109,7 @@ export async function handleOAuthCallbackMutation({ code, state }: { code: strin
             expires_at: tokenResponse.expiresOn ? Math.floor(new Date(tokenResponse.expiresOn).getTime() / 1000) : undefined,
             frequency: +metadata.frequency || undefined,
             sendMode: metadata.sendMode || 'draft',
+            reveal_ai: metadata?.reveal_ai,
             subscriptionId: subscriptionDetails?.subscriptionId,
             userId: userId,
             historyId: -1, // Use subscription ID as historyId

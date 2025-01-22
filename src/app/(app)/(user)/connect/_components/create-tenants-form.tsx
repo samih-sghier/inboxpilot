@@ -28,7 +28,7 @@ import { Icons } from "@/components/ui/icons";
 import { authorizeGmailMutationRead, authorizeGmailMutationSend } from "@/server/actions/gmail/mutations";
 import { getOrganizations } from "@/server/actions/organization/queries";
 import { authorizeOutlook } from "@/server/actions/outlook/mutations";
-
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaultOpen: boolean, orgId: string, upgradeNeeded: boolean }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -36,41 +36,31 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
     const form = useForm({
         defaultValues: {
             purpose: "",
-            // frequency: "",
-            sendMode: "draft" // Add default value for sendMode
+            sendMode: "send",
+            reveal_ai: true
         },
     });
-
 
     const handleConnect = async (provider: string, data: any) => {
         if (upgradeNeeded) {
             toast.error("You have exceeded your plan's connect accounts limit!");
-            return
+            return;
         }
 
-        if (provider === 'google') {
-            try {
-                const authUrl = await authorizeGmailMutationSend({ ...data, orgId, provider });
-                window.location.href = authUrl;
-            } catch (error) {
-                toast.error("Failed to authorize Gmail");
-            }
-        } else if (provider === 'outlook') {
-            try {
-                const authUrl = await authorizeOutlook({ ...data, orgId, provider });
-                window.location.href = authUrl;
-            } catch (error) {
-                toast.error("Failed to authorize Outlook");
-            }
+        try {
+            const authUrl = provider === 'google'
+                ? await authorizeGmailMutationSend({ ...data, orgId, provider })
+                : await authorizeOutlook({ ...data, orgId, provider });
+            window.location.href = authUrl;
+        } catch (error) {
+            toast.error(`Failed to authorize ${provider === 'google' ? 'Gmail' : 'Outlook'}`);
         }
     };
 
     const onSubmit = async (data: any) => {
-        const frequency = data.frequency === 'manual' ? null : parseInt(data.frequency, 10);
-
         try {
             setIsLoading(true);
-            await handleConnect('google', { ...data, frequency }); // Pass frequency in minutes or null
+            await handleConnect('google', data);
             form.reset();
             setIsOpen(false);
         } catch (error) {
@@ -113,8 +103,6 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="customer_support">Customer Support</SelectItem>
-                                                {/* <SelectItem value="sales">Sales</SelectItem> */}
-                                                {/* <SelectItem value="personal_assistant">Personal Assistant</SelectItem> */}
                                                 <SelectItem value="technical_inquiries">Technical Inquiries</SelectItem>
                                                 <SelectItem value="security_operations">Security Operations</SelectItem>
                                                 <SelectItem value="multipurpose">Multipurpose</SelectItem>
@@ -129,38 +117,10 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                             )}
                         />
 
-                        {/* <FormField
+                        <FormField
                             control={form.control}
                             name="frequency"
                             rules={{ required: "Frequency is required" }}
-                            render={({ field, fieldState }) => (
-                                <FormItem>
-                                    <FormLabel>Reply Frequency</FormLabel>
-                                    <FormControl>
-                                        <Select
-                                            value={field.value}
-                                            onValueChange={(value) => field.onChange(value)}
-                                        >
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select frequency" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="0">less than 1 minute</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormDescription>
-                                        Select when to automate replies if no response is received.
-                                    </FormDescription>
-                                    <FormMessage>{fieldState.error?.message}</FormMessage>
-                                </FormItem>
-                            )}
-                        /> */}
-
-                        <FormField
-                            control={form.control}
-                            name="sendMode"
-                            rules={{ required: "Send mode is required" }}
                             render={({ field, fieldState }) => (
                                 <FormItem>
                                     <FormLabel>Send Mode</FormLabel>
@@ -182,6 +142,30 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                         Choose whether to send emails automatically or create drafts for review.
                                     </FormDescription>
                                     <FormMessage>{fieldState.error?.message}</FormMessage>
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="reveal_ai"
+                            render={({ field }) => (
+                                <FormItem className="flex items-start space-x-3 p-4 border rounded-md">
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                            className="mt-4" // This class ensures the checkbox isn't too far off
+                                        />
+                                    </FormControl>
+                                    <div className="leading-none space-y-1">
+                                        <FormLabel className="text-sm font-medium"> {/* Slightly adjust label size */}
+                                            Reveal AI-generated replies
+                                        </FormLabel>
+                                        <FormDescription className="text-sm text-gray-500">
+                                            Enable this option to inform recipients that the reply was generated by AI.
+                                        </FormDescription>
+                                    </div>
                                 </FormItem>
                             )}
                         />

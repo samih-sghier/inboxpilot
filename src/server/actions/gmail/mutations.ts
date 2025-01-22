@@ -36,7 +36,8 @@ export interface MetaData {
     frequency: number,
     sendMode: string,
     purpose: string,
-    provider: string
+    provider: string,
+    reveal_ai: boolean
 
 }
 export async function handleOAuthCallbackMutation({ code, state }: { code: string, state: any }) {
@@ -75,6 +76,7 @@ export async function handleOAuthCallbackMutation({ code, state }: { code: strin
             expires_at: tokens.expiry_date ? Math.floor(tokens.expiry_date / 10000) : undefined,
             frequency: +metadata.frequency || undefined,
             sendMode: metadata.sendMode || 'draft',
+            reveal_ai: metadata?.reveal_ai,
             isActive: true,
             historyId: watchResponse.historyId || -1,
             expiration: BigInt(watchResponse.expiration || 0),

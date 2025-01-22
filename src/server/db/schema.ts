@@ -404,6 +404,7 @@ export const connected = createTable("connected", {
     sendMode: text("sendMode").notNull(),
     provider: varchar("provider", { length: 255 }).notNull(),
     isActive: boolean("isActive").default(true),
+    reveal_ai: boolean("reveal_ai").default(true),
     expires_at: integer("expires_at"),
     lastOn: timestamp("lastOn", { mode: "date" }),
     //gmail watchlist
@@ -427,6 +428,7 @@ export const connectedInsertSchema = z.object({
     expiration: z.bigint().optional(), // Add expiration as optional
     purpose: z.string().optional(),
     sendMode: z.string().default("draft"),
+    reveal_ai: z.boolean().default(true),
     subscriptionId: z.string().optional(),
     userId: z.string().optional(),
     isActive: z.boolean().default(true),
