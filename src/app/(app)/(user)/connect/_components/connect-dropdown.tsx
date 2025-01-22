@@ -104,7 +104,7 @@ export function ConnectedEmailsDropdown(props: ConnectedEmailDropdownProps) {
                     onClick={handleRemoveConnectedEmail}
                     className="text-red-600"
                 >
-                    Remove
+                    Disconnect
                 </DropdownMenuItem>
 
 
