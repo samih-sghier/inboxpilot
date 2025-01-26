@@ -145,7 +145,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploade
                             Link your Email Account
                         </DialogTitle>
                         <DialogDescription className="mt-2">
-                            Your privacy is our priority. Read more{" "} 
+                            Your privacy is our priority. Read more{" "}
                             <a href="https://inboxpilot.co/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
                                 here
                             </a>.
@@ -283,7 +283,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploade
                             <DialogDescription className="space-y-4">
                                 <div className="bg-red-50 border border-red-200 p-3 rounded-md">
                                     <p className="text-red-700 font-semibold">
-                                        Caution: Emails sent to this address will receive automatic AI-generated responses or drafts.
+                                        Caution: Emails sent to this address will receive automatic AI-generated responses sent from your account.
                                     </p>
                                 </div>
 
@@ -352,8 +352,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploade
                             <DialogDescription className="space-y-4">
                                 <div className="bg-red-50 border border-red-200 p-3 rounded-md">
                                     <p className="text-red-700 font-semibold">
-                                        Important: A draft will be automatically created for every incoming email and added to the reply thread in your email account. Simply review the draft and click send. If you'd rather automate this process, select "Send Automatically" as your send mode.
-                                    </p>
+                                        Important: For every incoming email, a draft will be automatically created and added to the corresponding email thread in your account. To view the draft, navigate to the specific email thread in your account. Simply review the draft, make any necessary edits, and click "Send" when you're ready.                                    </p>
                                 </div>
                                 <div className="text-sm text-muted-foreground">
                                     {!hasUploadedSources ? (
