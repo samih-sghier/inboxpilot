@@ -19,8 +19,6 @@ const paginatedSgAlertPropsSchema = z.object({
     recipient: z.string().optional(),
     archived: z.boolean().optional(),
     priority: z.string().optional(),
-
-
 });
 
 type GetPaginatedSgAlertQueryProps = z.infer<typeof paginatedSgAlertPropsSchema>;
