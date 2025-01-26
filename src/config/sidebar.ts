@@ -130,7 +130,7 @@ const navigation: SidebarNavItems[] = [
                 href: siteUrls.dashboard.home,
             },
             {
-                label: "Train Data",
+                label: "My Data",
                 icon: Plug2Icon,
                 href: siteUrls.dashboard.sources,
             },
