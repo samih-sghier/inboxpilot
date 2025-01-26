@@ -7,13 +7,13 @@
 export const siteConfig = {
     name: "InboxPilot",
     description:
-        "Auomate Inbound Emails",
+        "Automate Email Replies",
     orgImage:
         "https://utfs.io/f/z1SQx2HK8Pts7SALuDtXkWVjivSnqfBPEIcCFDdzH9NZ1r3O",
     contactEmail: "support@inboxpilot.co",
     noReplyEmail: "no-reply@inboxpilot.co",
     catchyPhrases: [
-        "Automatic Helpdesk",
+        "Automate Email Replies",
         "Automate Emails",
         "Email Assistant",
         "AI Email Assistant",
