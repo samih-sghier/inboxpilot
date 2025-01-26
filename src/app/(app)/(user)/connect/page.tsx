@@ -83,6 +83,7 @@ export default async function UserTenantPage() {
                         <p className="text-red-700 text-sm">
                             ⚠️ Important: The auto-reply/draft will remain active until you disconnect it.
                             If you are testing, don't forget to disconnect your account after you are done.
+                            It will also automatically disconnect if you exceed your plan's allocated tokens.
                         </p>
                     </div>
                 )}
