@@ -33,7 +33,7 @@ export default async function HomePage() {
         <WebPageWrapper>
             <WebPageHeader
                 badge="Review & Send or Go on Autopilot"
-                title={`Chatbot for your Inbox`}
+                title={`Automated Email Replies`}
             >
                 <Balancer
                     as="p"
