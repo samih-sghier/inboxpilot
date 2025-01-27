@@ -206,8 +206,8 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploade
                                                     <SelectValue placeholder="Select Mode" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="send">Send Automatically</SelectItem>
-                                                    <SelectItem value="draft">Create Drafts Only</SelectItem>
+                                                    <SelectItem value="send">Send Replies Automatically</SelectItem>
+                                                    <SelectItem value="draft">Create Draft Replies Only</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>
