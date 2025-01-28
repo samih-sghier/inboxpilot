@@ -20,14 +20,14 @@ import { prop } from "node_modules/cheerio/dist/esm/api/attributes";
 
 type ConnectedEmailDropdownProps = z.infer<typeof connectedSelectSchema>;
 
-export function ConnectedEmailsDropdown(props: ConnectedEmailDropdownProps) {
+export function ConnectedEmailsDropdown(props: any) {
     const router = useRouter();
 
     const {
         mutateAsync: removeConnectedEmailMutate,
         isPending: isRemoveConnectedEmailPending,
     } = useMutation({
-        mutationFn: () => removeConnectedItemMutation({ email: props.email }),
+        mutationFn: () => removeConnectedItemMutation({ email: props.email, orgId: props.orgId }),
         onSettled: () => {
             router.refresh();
         },

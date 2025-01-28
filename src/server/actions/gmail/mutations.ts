@@ -273,14 +273,19 @@ export async function createConnectedMutation(props: CreateConnectedProps) {
  */
 export async function removeConnectedItemMutation({
     email,
+    orgId,
 }: {
     email: string;
+    orgId: string;
 }) {
-    const { currentOrg } = await getOrganizations();
 
     // Ensure an email is provided
     if (!email) {
-        throw new Error("Email must be provided");
+        throw new Error("Email not provided; contact support@inboxpilot.co");
+    }
+
+    if (!orgId) {
+        throw new Error("Org id must be provided; contact support@inboxpilot.co");
     }
 
     // Fetch tokens for the given email from the connected table
@@ -289,7 +294,7 @@ export async function removeConnectedItemMutation({
         .select()
         .from(connected)
         .where(and(
-            eq(connected.orgId, currentOrg.id),
+            eq(connected.orgId, orgId),
             eq(connected.email, email)
         ))
         .execute();
@@ -302,7 +307,7 @@ export async function removeConnectedItemMutation({
     // Remove the connected item
     const result = await db.delete(connected).where(
         and(
-            eq(connected.orgId, currentOrg.id),
+            eq(connected.orgId, orgId),
             eq(connected.email, email)
         )
     ).execute();
