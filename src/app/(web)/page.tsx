@@ -32,7 +32,7 @@ export default async function HomePage() {
     return (
         <WebPageWrapper>
             <WebPageHeader
-                badge="Review & Send or Go on Autopilot"
+                badge="Email Support on Autopilot"
                 title={`Automated Email Replies`}
             >
                 <Balancer
@@ -47,7 +47,7 @@ export default async function HomePage() {
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
-                    Connect your email, train AI with your company data (website, faq...) and let it manage all incoming emails around the clock—delivering responses in your brand's voice.
+                    Connect your email, train AI with your company data (website, faq...) and let it reply to all incoming emails around the clock—delivering responses in your brand's voice.
                 </Balancer>
 
                 <div className="flex items-center gap-2">
