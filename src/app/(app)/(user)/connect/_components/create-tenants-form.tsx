@@ -287,7 +287,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploade
                                     </p>
                                 </div>
 
-                                <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-md">
+                                {/* <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-md">
                                     <p className="text-yellow-800">
                                         Important Checklist:
                                         <ul className="list-disc list-inside ml-2 mt-1">
@@ -295,7 +295,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploade
                                             <li>Choose the sending mode: create drafts only or send automatically.</li>
                                         </ul>
                                     </p>
-                                </div>
+                                </div> */}
 
                                 <div className="text-sm text-muted-foreground">
                                     {!hasUploadedSources ? (
