@@ -40,14 +40,14 @@ export default async function HomePage() {
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
 
-                    AI that learns your business and replies to emails 24/7
+                    AI that learns your business and replies to emails 24/7 from your support email account!
                 </Balancer>
 
                 <Balancer
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
-                    Connect your email, train AI with your company data, and let it manage all incoming emails around the clock—delivering responses in your brand's voice and with your expertise.
+                    Connect your email, train AI with your company data (website, faq...) and let it manage all incoming emails around the clock—delivering responses in your brand's voice.
                 </Balancer>
 
                 <div className="flex items-center gap-2">
