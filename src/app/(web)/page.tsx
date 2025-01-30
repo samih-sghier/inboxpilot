@@ -86,7 +86,7 @@ export default async function HomePage() {
 
 const VideoDisplay = () => {
     // YouTube parameters for high quality playback
-    const videoId = 'QGM8Eu3yDH4';
+    const videoId = '2RI69BaMtIo';
     const params = new URLSearchParams({
         rel: '0',           // Don't show related videos
         modestbranding: '1', // Minimal YouTube branding
