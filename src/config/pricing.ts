@@ -73,22 +73,22 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "3",
-        title: "200k email tokens (~20 Emails)",
+        title: "20 Emails",
         includedIn: [pricingIds.free],
     },
     {
         id: "4",
-        title: "2m email tokens (~200 Emails)",
+        title: "200 Emails",
         includedIn: [pricingIds.hobby],
     },
     {
         id: "5",
-        title: "10m email tokens (~1,000 Emails)",
+        title: "1,000 Emails",
         includedIn: [pricingIds.standard],
     },
     {
         id: "6",
-        title: "40m email tokens (~5,000 Emails)",
+        title: "5,000 Email",
         includedIn: [pricingIds.unlimited],
     },
     {
@@ -113,22 +113,22 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "11",
-        title: "400,000 chars data source limit",
+        title: "400,000 characters data source limit",
         includedIn: [pricingIds.free],
     },
     {
         id: "12",
-        title: "5,000,000 chars data source limit",
+        title: "5,000,000 characters data source limit",
         includedIn: [pricingIds.hobby],
     },
     {
         id: "13",
-        title: "11,000,000 chars data source limit",
+        title: "11,000,000 characters data source limit",
         includedIn: [pricingIds.standard],
     },
     {
         id: "14",
-        title: "20,000,000 chars data source limit",
+        title: "20,000,000 characters data source limit",
         includedIn: [pricingIds.unlimited],
     },
     {
@@ -183,6 +183,11 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "25",
+        title: "Multilanguage Support",
+        includedIn: [pricingIds.free, pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
+    },
+    {
+        id: "26",
         title: "Remove 'Powered by InboxPilot'",
         includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
     }

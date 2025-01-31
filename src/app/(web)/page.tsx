@@ -32,22 +32,22 @@ export default async function HomePage() {
     return (
         <WebPageWrapper>
             <WebPageHeader
-                badge="Review & Send or Go on Autopilot"
-                title={`Chatbot for your Inbox`}
+                badge="Email Support on Autopilot"
+                title={`Automated Email Replies`}
             >
                 <Balancer
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
 
-                    AI that learns your business and replies to emails 24/7
+                    AI that learns your business and replies to emails 24/7 from your support email account!
                 </Balancer>
 
                 <Balancer
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
-                    Connect your email, train AI with your company data, and let it manage all incoming emails around the clock—delivering responses in your brand's voice and with your expertise.
+                    Connect your email, train AI with your company data (website, faq...) and let it reply to all incoming emails around the clock—delivering responses in your brand's voice.
                 </Balancer>
 
                 <div className="flex items-center gap-2">
@@ -86,7 +86,7 @@ export default async function HomePage() {
 
 const VideoDisplay = () => {
     // YouTube parameters for high quality playback
-    const videoId = 'QGM8Eu3yDH4';
+    const videoId = '2RI69BaMtIo';
     const params = new URLSearchParams({
         rel: '0',           // Don't show related videos
         modestbranding: '1', // Minimal YouTube branding

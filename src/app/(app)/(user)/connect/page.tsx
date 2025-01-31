@@ -13,6 +13,7 @@ import { getOrgConnectedQuery } from "@/server/actions/gmail/queries";
 import { SidebarLoading } from "../../_components/sidebar";
 import { getOrgSubscription } from "@/server/actions/stripe_subscription/query";
 import { Icons } from "@/components/ui/icons";
+import { getOrgSourcesQuery } from "@/server/actions/sources/queries";
 
 function mapFrequencyToLabel(frequency: number | string | null): string {
     switch (frequency) {
@@ -69,6 +70,7 @@ export default async function UserTenantPage() {
     const source = await getOrgConnectedQuery();
     const { currentOrg } = await getOrganizations();
     const subscription = await getOrgSubscription();
+    const dataSources = await getOrgSourcesQuery();
 
     return (
         <AppPageShell
@@ -76,12 +78,31 @@ export default async function UserTenantPage() {
             description={connectPageConfig.description}
         >
             <Suspense fallback={<SidebarLoading />}>
+                {source.length > 0 && (
+                    <div className="w-full bg-red-50 border border-red-200 p-3 rounded-md mb-6">
+                        <p className="text-red-700 text-sm">
+                            ⚠️ Important: The auto-reply/draft will remain active until you disconnect it.
+                            If you are testing, don't forget to disconnect your account after you are done.
+                            It will also automatically disconnect if you exceed your plan's allocated tokens.
+                        </p>
+                    </div>
+                )}
                 <div className="flex w-full items-start justify-between mb-6">
                     <h2 className="text-base font-medium sm:text-lg">
                         {source.length} email accounts you have linked.
                     </h2>
 
-                    <ConnectEmailForm defaultOpen={false} orgId={currentOrg.id} upgradeNeeded={(subscription?.plan?.planLimit ?? 1) <= source.length} />
+                    <ConnectEmailForm defaultOpen={false} orgId={currentOrg.id} upgradeNeeded={(subscription?.plan?.planLimit ?? 1) <= source.length} hasUploadedSources={
+                        dataSources &&
+                        (
+                            (dataSources.documents && Object.keys(dataSources.documents).length > 0) ||
+                            (dataSources.mail_source && Object.keys(dataSources.mail_source).length > 0) ||
+                            (dataSources.text_source && dataSources.text_source.length > 0) ||
+                            (dataSources.qa_source && Object.keys(dataSources.qa_source).length > 0) ||
+                            (dataSources.website_data && Object.keys(dataSources.website_data).length > 0) ||
+                            (dataSources.llamaIndex && Object.keys(dataSources.llamaIndex).length > 0)
+                        )
+                    } />
                 </div>
 
                 <div className={source.length > 0 ? "grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid gap-4"}>

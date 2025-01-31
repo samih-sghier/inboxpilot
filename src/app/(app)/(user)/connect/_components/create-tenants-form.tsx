@@ -32,10 +32,12 @@ import { siteUrls } from "@/config/urls";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaultOpen: boolean, orgId: string, upgradeNeeded: boolean }) {
+export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploadedSources }: { defaultOpen: boolean, orgId: string, upgradeNeeded: boolean, hasUploadedSources: boolean }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [showSendAutoWarning, setShowSendAutoWarning] = useState(false);
+    const [showDraftAutoWarning, setShowDraftAutoWarning] = useState(false);
+
     const [pendingConnectData, setPendingConnectData] = useState<{
         provider: string,
         data: any
@@ -44,7 +46,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
     const form = useForm({
         defaultValues: {
             purpose: "",
-            sendMode: "draft",
+            sendMode: "",
             reveal_ai: true
         },
     });
@@ -74,6 +76,9 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                 // Store pending connection data and show warning
                 setPendingConnectData({ provider, data });
                 setShowSendAutoWarning(true);
+            } else if (data.sendMode === "draft") {
+                setPendingConnectData({ provider, data });
+                setShowDraftAutoWarning(true);
             } else {
                 // Directly connect if draft mode
                 const authUrl = await handleConnect(provider, data);
@@ -108,6 +113,26 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
         }
     };
 
+    const handleConfirmDraftMode = async () => {
+        if (pendingConnectData) {
+            try {
+                const authUrl = await handleConnect(
+                    pendingConnectData.provider,
+                    pendingConnectData.data
+                );
+
+                if (authUrl) {
+                    window.location.href = authUrl;
+                }
+
+                setShowDraftAutoWarning(false);
+                setPendingConnectData(null);
+            } catch (error) {
+                toast.error("Failed to connect email");
+            }
+        }
+    };
+
     return (
         <>
             <Dialog open={isOpen} onOpenChange={(o) => setIsOpen(o)}>
@@ -120,7 +145,16 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                             Link your Email Account
                         </DialogTitle>
                         <DialogDescription className="mt-2">
-                            Your privacy is our priority. All communications are fully encrypted, and we never access, store, or retain your data.
+                            Your privacy is our priority. Read more{" "}
+                            <a href="https://inboxpilot.co/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                                here
+                            </a>.
+                        </DialogDescription>
+                        <DialogDescription className="mt-2">
+                            If you're having any difficulties getting started, please email{" "}
+                            <a href="mailto:support@inboxpilot.co" className="text-blue-600 underline">
+                                support@inboxpilot.co
+                            </a>.
                         </DialogDescription>
                     </DialogHeader>
                     <Form {...form}>
@@ -172,8 +206,8 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                                     <SelectValue placeholder="Select Mode" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="send">Send Automatically</SelectItem>
-                                                    <SelectItem value="draft">Create Drafts Only</SelectItem>
+                                                    <SelectItem value="send">Send Replies Automatically</SelectItem>
+                                                    <SelectItem value="draft">Create Draft Replies Only</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>
@@ -242,36 +276,51 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
 
             {showSendAutoWarning && (
                 <Dialog open={showSendAutoWarning} onOpenChange={setShowSendAutoWarning}>
-                    <DialogContent>
+                    <DialogContent className="max-w-md">
                         <DialogHeader>
-                            <DialogTitle>Automated Email Replies</DialogTitle>
+                            <DialogTitle className="text-xl font-bold">⚠️ Automated Email Replies Warning</DialogTitle>
 
-                            <DialogDescription className="space-y-2">
-                                <p>
-                                    Every incoming email will receive an automatic response
-                                    generated by AI.
-                                </p>
+                            <DialogDescription className="space-y-4">
+                                <div className="bg-red-50 border border-red-200 p-3 rounded-md">
+                                    <p className="text-red-700 font-semibold">
+                                        Caution: Emails sent to this address will receive automatic AI-generated responses sent from your account.
+                                    </p>
+                                </div>
 
-                                <p>
-                                    If you haven't uploaded your data yet, please do so to
-                                    ensure accurate responses.
-                                </p>
+                                {/* <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-md">
+                                    <p className="text-yellow-800">
+                                        Important Checklist:
+                                        <ul className="list-disc list-inside ml-2 mt-1">
+                                            <li>Verify data sources are uploaded</li>
+                                            <li>Choose the sending mode: create drafts only or send automatically.</li>
+                                        </ul>
+                                    </p>
+                                </div> */}
 
-                                <Link
-                                    href={siteUrls.dashboard.sources}
-                                    className={cn(
-                                        "inline-block text-foreground",
-                                        "underline underline-offset-4 hover:no-underline"
+                                <div className="text-sm text-muted-foreground">
+                                    {!hasUploadedSources ? (
+                                        <p>
+                                            No data sources uploaded. The AI cannot generate responses without context.
+                                            <Link
+                                                href={siteUrls.dashboard.sources}
+                                                className={cn(
+                                                    "ml-2 text-blue-600 hover:underline",
+                                                    "inline-block"
+                                                )}
+                                            >
+                                                Upload Sources Now
+                                            </Link>
+                                        </p>
+                                    ) : (
+                                        <p className="text-green-600">
+                                            ✓ Data sources verified
+                                        </p>
                                     )}
-                                >
-                                    Click here to upload your data
-                                </Link>
+                                </div>
                             </DialogDescription>
                         </DialogHeader>
 
-
-
-                        <DialogFooter>
+                        <DialogFooter className="flex justify-between">
                             <DialogClose asChild>
                                 <Button
                                     variant="outline"
@@ -283,8 +332,68 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded }: { defaul
                                     Cancel
                                 </Button>
                             </DialogClose>
-                            <Button onClick={handleConfirmSendMode}>
-                                I understand
+                            <Button
+                                onClick={handleConfirmSendMode}
+                                disabled={!hasUploadedSources}
+                            >
+                                I Understand
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
+            )}
+
+            {showDraftAutoWarning && (
+                <Dialog open={showDraftAutoWarning} onOpenChange={setShowDraftAutoWarning}>
+                    <DialogContent className="max-w-md">
+                        <DialogHeader>
+                            <DialogTitle className="text-xl font-bold">⚠️ Automated Email Drafts Warning</DialogTitle>
+
+                            <DialogDescription className="space-y-4">
+                                <div className="bg-red-50 border border-red-200 p-3 rounded-md">
+                                    <p className="text-red-700 font-semibold">
+                                        Important: For every incoming email, a draft will be automatically created and added to the corresponding email thread in your account. To view the draft, navigate to the specific email thread in your account. Simply review the draft, make any necessary edits, and click "Send" when you're ready.                                    </p>
+                                </div>
+                                <div className="text-sm text-muted-foreground">
+                                    {!hasUploadedSources ? (
+                                        <p>
+                                            No data sources uploaded. The AI cannot generate responses without context.
+                                            <Link
+                                                href={siteUrls.dashboard.sources}
+                                                className={cn(
+                                                    "ml-2 text-blue-600 hover:underline",
+                                                    "inline-block"
+                                                )}
+                                            >
+                                                Upload Sources Now
+                                            </Link>
+                                        </p>
+                                    ) : (
+                                        <p className="text-green-600">
+                                            ✓ Data sources verified
+                                        </p>
+                                    )}
+                                </div>
+                            </DialogDescription>
+                        </DialogHeader>
+
+                        <DialogFooter className="flex justify-between">
+                            <DialogClose asChild>
+                                <Button
+                                    variant="outline"
+                                    onClick={() => {
+                                        setShowDraftAutoWarning(false);
+                                        setPendingConnectData(null);
+                                    }}
+                                >
+                                    Cancel
+                                </Button>
+                            </DialogClose>
+                            <Button
+                                onClick={handleConfirmDraftMode}
+                                disabled={!hasUploadedSources}
+                            >
+                                I Understand
                             </Button>
                         </DialogFooter>
                     </DialogContent>

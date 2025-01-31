@@ -59,7 +59,7 @@ export async function sendOrgInviteEmail({
                         If you didn't request this email, you can ignore it.
                     </p>
                 </div>`,
-            text: `Click the link below to join the orgaisation. ${invLink}`,
+            text: `Click the link below to join the org. ${invLink}`,
             tags: [
                 {
                     name: "category",

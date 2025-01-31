@@ -10,6 +10,7 @@ export const defaultMetadata: Metadata = {
     description: siteConfig.description,
     metadataBase: new URL(siteUrls.publicUrl),
     keywords: [
+        "automated email replies",
         "inbound email automation software",
         "automated inbound email replies",
         "AI for inbound email responses",
