@@ -5,7 +5,7 @@ import { emailConfigurationsPageConfig } from "@/app/(app)/(user)/configuration/
 import ConfigurationLoading from "src/app/(app)/(user)/configuration/loading";
 import { getOrgConnectedQuery } from "@/server/actions/gmail/queries";
 import { getAllPaginatedConfiguredEmailsQuery } from "@/server/actions/configuration/queries";
-import { blacklistTable } from "./_components/blacklist-table";
+import { BlacklistTable } from "./_components/blacklist-table";
 import type { SearchParams } from "@/types/data-table";
 import { Button } from "@/components/ui/button"; // Assuming you have a Button component
 import { siteUrls } from "@/config/urls";
@@ -54,7 +54,7 @@ export default async function ConfigurationPage({ searchParams }: EmailLogsPageP
                 <Button type="button">Add Email/Domain</Button>
                     
             <div className="w-full space-y-5">
-                <blacklistTable emailLogsPromise={blacklistPromise} />
+                <BlacklistTable blacklistPromise={blacklistPromise} />
             </div>
 
             </Suspense>

@@ -16,6 +16,8 @@ type blacklistTableProps = {
     blacklistPromise: ReturnType<typeof getAllPaginatedConfiguredEmailsQuery>;
 };
 
+
+
 // Define searchable columns for the DataTable
 const searchableColumns: DataTableSearchableColumn<blacklistData>[] = [
     { id: "blacklistedEmail", placeholder: "Search by email..." },
@@ -23,7 +25,7 @@ const searchableColumns: DataTableSearchableColumn<blacklistData>[] = [
     // { id: "lastName", placeholder: "Search tenant name..." }
 ];
 
-export function blacklistTable({ blacklistPromise }: blacklistTableProps) {
+export function BlacklistTable({ blacklistPromise }: blacklistTableProps) {
     const { data, pageCount, total } = React.use(blacklistPromise);
 
     // Define the columns
