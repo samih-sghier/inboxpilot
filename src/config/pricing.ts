@@ -55,6 +55,7 @@ export type PricingFeature = {
 
 export const pricingIds = {
     free: "free",
+    starter: "starter",
     hobby: "hobby",
     standard: "standard",
     unlimited: "unlimited",
@@ -69,7 +70,7 @@ export const pricingFeatures: PricingFeature[] = [
     {
         id: "2",
         title: "Access to latest models",
-        includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
+        includedIn: [pricingIds.hobby, pricingIds.starter, pricingIds.standard, pricingIds.unlimited],
     },
     {
         id: "3",
@@ -78,118 +79,128 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "4",
+        title: "100 Emails",
+        includedIn: [pricingIds.starter],
+    },
+    {
+        id: "5",
         title: "200 Emails",
         includedIn: [pricingIds.hobby],
     },
     {
-        id: "5",
+        id: "6",
         title: "1,000 Emails",
         includedIn: [pricingIds.standard],
     },
     {
-        id: "6",
+        id: "7",
         title: "5,000 Email",
         includedIn: [pricingIds.unlimited],
     },
     {
-        id: "7",
+        id: "8",
         title: "1 connected email account",
-        includedIn: [pricingIds.free],
+        includedIn: [pricingIds.free, pricingIds.starter],
     },
     {
-        id: "8",
+        id: "9",
         title: "2 connected email accounts",
         includedIn: [pricingIds.hobby],
     },
     {
-        id: "9",
+        id: "10",
         title: "5 connected email accounts",
         includedIn: [pricingIds.standard],
     },
     {
-        id: "10",
+        id: "11",
         title: "10 connected email accounts",
         includedIn: [pricingIds.unlimited],
     },
     {
-        id: "11",
+        id: "12",
         title: "400,000 characters data source limit",
         includedIn: [pricingIds.free],
     },
     {
-        id: "12",
+        id: "13",
+        title: "2,500,000 characters data source limit",
+        includedIn: [pricingIds.starter],
+    },
+    {
+        id: "14",
         title: "5,000,000 characters data source limit",
         includedIn: [pricingIds.hobby],
     },
     {
-        id: "13",
+        id: "15",
         title: "11,000,000 characters data source limit",
         includedIn: [pricingIds.standard],
     },
     {
-        id: "14",
+        id: "16",
         title: "20,000,000 characters data source limit",
         includedIn: [pricingIds.unlimited],
     },
     {
-        id: "15",
+        id: "17",
         title: "1 team member",
-        includedIn: [pricingIds.free],
+        includedIn: [pricingIds.free, pricingIds.starter],
     },
     {
-        id: "16",
+        id: "18",
         title: "3 team members",
         includedIn: [pricingIds.hobby],
     },
     {
-        id: "17",
+        id: "19",
         title: "5 team members",
         includedIn: [pricingIds.standard],
     },
     {
-        id: "18",
+        id: "20",
         title: "20 team members",
         includedIn: [pricingIds.unlimited],
     },
     {
-        id: "19",
+        id: "21",
         title: "Limited to 10 links to train on",
         includedIn: [pricingIds.free],
     },
     {
-        id: "20",
+        id: "22",
+        title: "Limited to 30 links to train on",
+        includedIn: [pricingIds.starter],
+    },
+    {
+        id: "23",
         title: "Up to 100 links to train on",
         includedIn: [pricingIds.hobby],
     },
     {
-        id: "21",
+        id: "24",
         title: "Up to 500 links to train on",
         includedIn: [pricingIds.standard],
     },
     {
-        id: "22",
+        id: "25",
         title: "Up to 1000 links to train on",
         includedIn: [pricingIds.unlimited],
     },
-    // {
-    //     id: "23",
-    //     title: "Unlimited links to train on",
-    //     includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
-    // },
-    {
-        id: "24",
-        title: "Capture Email Escalations",
-        includedIn: [pricingIds.free, pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
-    },
-    {
-        id: "25",
-        title: "Multilanguage Support",
-        includedIn: [pricingIds.free, pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
-    },
     {
         id: "26",
+        title: "Capture Email Escalations",
+        includedIn: [pricingIds.free, pricingIds.starter, pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
+    },
+    {
+        id: "27",
+        title: "Multilanguage Support",
+        includedIn: [pricingIds.free, pricingIds.starter, pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
+    },
+    {
+        id: "28",
         title: "Remove 'Powered by InboxPilot'",
-        includedIn: [pricingIds.hobby, pricingIds.standard, pricingIds.unlimited],
+        includedIn: [pricingIds.hobby, pricingIds.starter, pricingIds.standard, pricingIds.unlimited],
     }
 ];
 
@@ -198,7 +209,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.free,
         title: "Free",
-        description: "Test AI workflows on small-scale email queries. Perfect for individuals exploring automation.",
+        description: "Start automating emails with AI. Perfect for testing",
         price: {
             monthly: 0,
             yearly: 0,
@@ -220,9 +231,37 @@ export const pricingPlans: PricingPlan[] = [
         links: 10,
     },
     {
+        id: pricingIds.starter,
+        title: "Starter",
+        description: "Basic AI email automation for small teams.",
+        price: {
+            monthly: 9,
+            yearly: 99,
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+        },
+        duration: "per month",
+        highlight: "2,000 message credits/month",
+        buttonHighlighted: false,
+        planLimit: 2,
+        usersLimit: 1,
+        uniqueFeatures: [],
+        monthlyTokens: 1000000,
+        chatbots: 2,
+        charactersPerChatbot: 2500000,
+        teamMembers: 1,
+        links: 30,
+        priceId: {
+            monthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER_MONTHLY ?? "",
+            yearly: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER_YEARLY ?? ""
+        },
+    },
+    {
         id: pricingIds.hobby,
         title: "Hobby",
-        description: "Manage moderate email workflows for small teams or basic CRM tasks with ease.",
+        description: "Enhanced email tools for growing businesses.",
         price: {
             monthly: 19,
             yearly: 190,
@@ -250,7 +289,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.standard,
         title: "Standard",
-        description: "Streamline email workflows for mid-sized teams handling customer support or CRM.",
+        description: "Advanced automation for scaling companies.",
         price: {
             monthly: 99,
             yearly: 990,
@@ -278,7 +317,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.unlimited,
         title: "Unlimited",
-        description: "Built for large teams managing high-volume email workflows for CRM or operations.",
+        description: "Complete email AI suite for large enterprises.",
         price: {
             monthly: 399,
             yearly: 3990,

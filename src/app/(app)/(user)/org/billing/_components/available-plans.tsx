@@ -50,7 +50,7 @@ export function AvailablePlans({ subscription }: AvailablePlansProps) {
                     plan.priceId?.yearly === subscription?.plan?.priceId,
             )
                 ? "monthly"
-                : "yearly",
+                : "monthly",
         },
     });
 

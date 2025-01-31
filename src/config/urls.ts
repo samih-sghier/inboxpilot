@@ -29,6 +29,7 @@ export const siteUrls = {
         home: "/dashboard",
         sources: "/sources",
         connect: "/connect",
+        // configuration: "/configuration",
         logs: "/logs",
         alerts: "/alerts",
     },
