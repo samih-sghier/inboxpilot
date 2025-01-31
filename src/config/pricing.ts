@@ -75,7 +75,7 @@ export const pricingFeatures: PricingFeature[] = [
     },
     {
         id: "3",
-        title: "20 Emails",
+        title: "10 Emails",
         includedIn: [pricingIds.free],
     },
     {
@@ -226,7 +226,7 @@ export const pricingPlans: PricingPlan[] = [
         usersLimit: 1,
         uniqueFeatures: [],
         monthlyTokens: 200000,
-        monthlyEmails: 20,
+        monthlyEmails: 10,
         chatbots: 1,
         charactersPerChatbot: 400000,
         teamMembers: 1,
