@@ -281,7 +281,7 @@ export const tenantTypeEnum = pgEnum("tenant-type", [
     "Corporate",
 ]);
 
-export const blacklistedData = createTable("blacklisted_email_config", {
+export const blacklistedData = createTable("configuration", {
     blacklistedEmail: varchar("email", { length: 255 }).notNull(),
     blacklistedDomain: varchar("domain", { length: 255 }).notNull(),
     note: text("note").notNull(),

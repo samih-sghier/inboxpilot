@@ -72,7 +72,6 @@ export function EmailLogsTable({ emailLogsPromise }: EmailLogsTableProps) {
 
     return (
         <>
-            <Button>hi</Button>
             <DataTable
                 table={table}
                 columns={columns}
