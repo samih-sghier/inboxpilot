@@ -1,6 +1,6 @@
 "use server";
 
-import { pricingPlans } from "@/config/pricing";
+import { freePricingPlan, pricingPlans } from "@/config/pricing";
 import { getOrgSubscription } from "@/server/actions/stripe_subscription/query";
 import { db } from "@/server/db";
 import { organizations, subscriptions, webhookEvents } from "@/server/db/schema";
@@ -107,7 +107,7 @@ export async function processWebhookEvent(webhookEvent: { id?: string; body: Str
 
                         await db
                             .update(organizations)
-                            .set({ max_tokens: plan.monthlyTokens })
+                            .set({ max_tokens: (plan?.monthlyTokens || freePricingPlan?.monthlyTokens), max_emails: (plan?.monthlyEmails || freePricingPlan?.monthlyEmails) })
                             .where(eq(organizations.id, orgId || "NO_ORG_ID"))
                             .execute();
                         // console.log("data to be inserted", updateData)

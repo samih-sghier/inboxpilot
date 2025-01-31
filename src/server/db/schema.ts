@@ -134,6 +134,8 @@ export const organizations = createTable("organization", {
     name: varchar("name", { length: 255 }).notNull(),
     tokens: integer("tokens").default(0),
     max_tokens: integer("max_tokens").default(freePricingPlan?.monthlyTokens || 0),
+    emails_sent: integer("emails_sent").default(0),
+    max_emails: integer("max_emails").default(freePricingPlan?.monthlyEmails || 0),
     email: varchar("email", { length: 255 }).notNull(),
     image: varchar("image", { length: 255 }),
     createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),

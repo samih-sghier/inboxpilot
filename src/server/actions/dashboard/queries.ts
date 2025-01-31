@@ -4,7 +4,7 @@ import { eq, count, and, isNotNull, or, ne } from "drizzle-orm";
 import { protectedProcedure } from "@/server/procedures";
 import { getOrganizations } from "@/server/actions/organization/queries";
 import { freePricingPlan } from "@/config/pricing";
-import { getOrgTokens, getOrgTokensBasedOnPlan } from "../stripe_subscription/query";
+import { getOrgMonthlyEmailsBasedOnPlan, getOrgTokens, getOrgTokensBasedOnPlan } from "../stripe_subscription/query";
 
 // Function to get dashboard information
 export async function getDashboardInfo() {
@@ -96,8 +96,8 @@ export async function getDashboardInfo() {
         .then(res => res[0]?.count ?? 0);
 
     // Implement logic for other metrics...
-    const tokenUsage: number | undefined = currentOrg.tokens || 0;
-    const maxTokens: number | undefined = currentOrg?.max_tokens || await getOrgTokensBasedOnPlan();
+    const emails_sent: number | undefined = currentOrg.emails_sent || 0;
+    const max_emails: number | undefined = currentOrg?.max_emails || await getOrgMonthlyEmailsBasedOnPlan();
 
     return {
         emailsSent,
@@ -108,9 +108,9 @@ export async function getDashboardInfo() {
         connectedEmailsGrowth: 0, // Placeholder
         sources: sourcesNotNull, // Placeholder
         draftedEmails: emailsDrafted, // Placeholder
-        overLimit: tokenUsage >= maxTokens,
+        overLimit: emails_sent >= max_emails,
         alerts, // Placeholder
-        apiUsage: `${formatNumber(tokenUsage)} / ${formatNumber(maxTokens)}`, // Use the new formatNumber function
+        apiUsage: `${formatNumber(emails_sent)} / ${formatNumber(max_emails)}`, // Use the new formatNumber function
         apiUsageChange: 0 // Placeholder
     };
 }

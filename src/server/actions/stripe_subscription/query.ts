@@ -71,6 +71,49 @@ export async function getOrgTokens() {
     return currentOrg?.tokens || await getOrgTokensBasedOnPlan(); 
 }
 
+export async function getOrgMonthlyEmailsBasedOnPlan() {
+    await protectedProcedure(); // Ensure the user is authenticated
+
+    const { currentOrg } = await getOrganizations(); // Get the current organization
+
+    if (!currentOrg) {
+        throw new Error("Organization not found.");
+    }
+
+    // Fetch the user's plan
+    const subscription = await getOrgSubscription(); // This function should return the user's current plan
+
+    if (!subscription) {
+        return freePricingPlan?.monthlyEmails;
+    }
+
+    // Determine the number of tokens based on the user's plan
+    let tokens;
+
+    // Assuming userPlan has a property that defines the token limit
+    switch (subscription.planTitle) {
+        case pricingPlans[0]?.title:
+            tokens = pricingPlans[0]?.monthlyEmails; // Adjust based on your free plan structure
+            break;
+        case pricingPlans[1]?.title:
+            tokens = pricingPlans[1]?.monthlyEmails; // Adjust based on your free plan structure
+            break;
+        case pricingPlans[2]?.title:
+            tokens = pricingPlans[2]?.monthlyEmails 
+            break;
+        case pricingPlans[3]?.title:
+            tokens = pricingPlans[3]?.monthlyEmails ; // Adjust based on your premium plan structure
+            break;
+        default:
+            tokens = freePricingPlan?.monthlyEmails; // Default case if no valid plan is found
+            break;
+    }
+
+    // Optionally, you can also check if the organization has a specific allocation
+    // For example, if the organization has a specific number of tokens that should be used
+    return tokens; // Return the calculated tokens based on the user's plan
+}
+
 export async function getOrgTokensBasedOnPlan() {
     await protectedProcedure(); // Ensure the user is authenticated
 

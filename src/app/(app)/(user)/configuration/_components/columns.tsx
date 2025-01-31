@@ -36,14 +36,7 @@ const EmailViewDialog = ({ email }: { email: BlacklistedEmailData }) => {
                 <div className="grid grid-cols-[auto,1fr] gap-x-2 text-sm">
                     <span className="font-semibold">Email:</span>
                     <span>{email.email}</span>
-                    <span className="font-semibold">Added On:</span>
-                    <span>{format(new Date(email.createdAt), "PPpp")}</span>
-                    {email.reason && (
-                        <>
-                            <span className="font-semibold">Reason:</span>
-                            <span>{email.reason}</span>
-                        </>
-                    )}
+            
                 </div>
             </div>
         </DialogContent>
@@ -60,14 +53,14 @@ const DomainViewDialog = ({ domain }: { domain: BlacklistedDomainData }) => {
                 <div className="grid grid-cols-[auto,1fr] gap-x-2 text-sm">
                     <span className="font-semibold">Domain:</span>
                     <span>{domain.domain}</span>
-                    <span className="font-semibold">Added On:</span>
+                    {/* <span className="font-semibold">Added On:</span>
                     <span>{format(new Date(domain.createdAt), "PPpp")}</span>
                     {domain.reason && (
                         <>
                             <span className="font-semibold">Reason:</span>
                             <span>{domain.reason}</span>
                         </>
-                    )}
+                    )} */}
                 </div>
             </div>
         </DialogContent>
@@ -80,15 +73,15 @@ export const emailBlacklistColumns: ColumnDef<BlacklistedEmailData>[] = [
         accessorKey: "email",
         header: "Email Address",
     },
-    {
-        accessorKey: "createdAt",
-        header: "Added On",
-        cell: ({ row }) => (
-            <span className="text-muted-foreground">
-                {format(new Date(row.getValue("createdAt")), "PPp")}
-            </span>
-        ),
-    },
+    // {
+    //     accessorKey: "createdAt",
+    //     header: "Added On",
+    //     cell: ({ row }) => (
+    //         <span className="text-muted-foreground">
+    //             {format(new Date(row.getValue("createdAt")), "PPp")}
+    //         </span>
+    //     ),
+    // },
     {
         id: "actions",
         cell: ({ row }) => (
@@ -113,15 +106,15 @@ export const domainBlacklistColumns: ColumnDef<BlacklistedDomainData>[] = [
         accessorKey: "domain",
         header: "Domain",
     },
-    {
-        accessorKey: "createdAt",
-        header: "Added On",
-        cell: ({ row }) => (
-            <span className="text-muted-foreground">
-                {format(new Date(row.getValue("createdAt")), "PPp")}
-            </span>
-        ),
-    },
+    // {
+    //     accessorKey: "createdAt",
+    //     header: "Added On",
+    //     cell: ({ row }) => (
+    //         <span className="text-muted-foreground">
+    //             {format(new Date(row.getValue("createdAt")), "PPp")}
+    //         </span>
+    //     ),
+    // },
     {
         id: "actions",
         cell: ({ row }) => (

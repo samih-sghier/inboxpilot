@@ -31,6 +31,7 @@ export type PricingPlan = {
     buttonHighlighted: boolean;
     planLimit: number;
     usersLimit: number;
+    monthlyEmails: number;
     uniqueFeatures?: string[];
     variantId?: {
         monthly: number;
@@ -209,7 +210,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.free,
         title: "Free",
-        description: "Start automating emails with AI. Perfect for testing",
+        description: "Start automating emails with AI",
         price: {
             monthly: 0,
             yearly: 0,
@@ -225,6 +226,7 @@ export const pricingPlans: PricingPlan[] = [
         usersLimit: 1,
         uniqueFeatures: [],
         monthlyTokens: 200000,
+        monthlyEmails: 20,
         chatbots: 1,
         charactersPerChatbot: 400000,
         teamMembers: 1,
@@ -233,7 +235,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.starter,
         title: "Starter",
-        description: "Basic AI email automation for small teams.",
+        description: "Basic AI email automation",
         price: {
             monthly: 9,
             yearly: 99,
@@ -249,6 +251,7 @@ export const pricingPlans: PricingPlan[] = [
         usersLimit: 1,
         uniqueFeatures: [],
         monthlyTokens: 1000000,
+        monthlyEmails: 100,
         chatbots: 2,
         charactersPerChatbot: 2500000,
         teamMembers: 1,
@@ -261,7 +264,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.hobby,
         title: "Hobby",
-        description: "Enhanced email tools for growing businesses.",
+        description: "Enhanced AI email automation",
         price: {
             monthly: 19,
             yearly: 190,
@@ -277,6 +280,7 @@ export const pricingPlans: PricingPlan[] = [
         usersLimit: 1,
         uniqueFeatures: [],
         monthlyTokens: 2000000,
+        monthlyEmails: 200,
         chatbots: 2,
         charactersPerChatbot: 5000000,
         teamMembers: 1,
@@ -289,7 +293,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.standard,
         title: "Standard",
-        description: "Advanced automation for scaling companies.",
+        description: "Heavy AI email automation",
         price: {
             monthly: 99,
             yearly: 990,
@@ -306,6 +310,8 @@ export const pricingPlans: PricingPlan[] = [
         uniqueFeatures: [],
         monthlyTokens: 10000000,
         chatbots: 10,
+        monthlyEmails: 1000,
+
         charactersPerChatbot: 11000000,
         teamMembers: 3,
         links: 1000,
@@ -317,7 +323,7 @@ export const pricingPlans: PricingPlan[] = [
     {
         id: pricingIds.unlimited,
         title: "Unlimited",
-        description: "Complete email AI suite for large enterprises.",
+        description: "Entreprise AI email automation",
         price: {
             monthly: 399,
             yearly: 3990,
@@ -333,6 +339,7 @@ export const pricingPlans: PricingPlan[] = [
         usersLimit: 5,
         uniqueFeatures: [],
         monthlyTokens: 400000000,
+        monthlyEmails: 5000,
         chatbots: 50,
         charactersPerChatbot: 20000000,
         teamMembers: 5,
