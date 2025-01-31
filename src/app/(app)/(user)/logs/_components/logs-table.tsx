@@ -11,6 +11,7 @@ import type {
 } from "@/types/data-table";
 import { type getAllPaginatedEmailLogsQuery } from "@/server/actions/logs/queries";
 import { ClearAllLogsDropdown } from "./clear-logs";
+import { Button } from "@/components/ui/button"; // Assuming you have a Button component
 
 type EmailLogsTableProps = {
     emailLogsPromise: ReturnType<typeof getAllPaginatedEmailLogsQuery>;

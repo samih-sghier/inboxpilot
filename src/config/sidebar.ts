@@ -17,7 +17,8 @@ import {
     UsersRoundIcon,
     EyeIcon,
     Plug2,
-    Plug2Icon
+    Plug2Icon,
+    MailQuestion
 
 } from "lucide-react";
 import { siteUrls } from "@/config/urls";
@@ -138,6 +139,11 @@ const navigation: SidebarNavItems[] = [
                 label: "Connect Accounts",
                 icon: LinkIcon,
                 href: siteUrls.dashboard.connect,
+            },
+            {
+                label: "Email Configuration",
+                icon: MailQuestion,
+                href: siteUrls.dashboard.emailConfig,
             },
             {
                 label: "Email Logs",

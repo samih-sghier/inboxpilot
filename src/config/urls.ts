@@ -27,6 +27,7 @@ export const siteUrls = {
     contact: "/contact",
     dashboard: {
         home: "/dashboard",
+        emailConfig: "/configuration",
         sources: "/sources",
         connect: "/connect",
         logs: "/logs",
