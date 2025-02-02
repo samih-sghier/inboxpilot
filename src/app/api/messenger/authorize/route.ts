@@ -1,6 +1,9 @@
-import { NextResponse } from 'next/server';
-import { handleOAuthCallbackMutation } from '@/server/actions/gmail/mutations';
+// app/api/facebook/authorize/route.ts
 import { siteUrls } from '@/config/urls';
+import { handleFacebookCallbackMutation } from '@/server/actions/messenger/mutations';
+import { NextResponse } from 'next/server';
+
+
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
@@ -14,7 +17,7 @@ export async function GET(request: Request) {
 
     try {
         // Exchange the authorization code for tokens
-        const { tokens, email, metadata } = await handleOAuthCallbackMutation({ code, state });
+        await handleFacebookCallbackMutation({ code, state });
         // const emails = await listEmailsMutation(tokens);
 
 

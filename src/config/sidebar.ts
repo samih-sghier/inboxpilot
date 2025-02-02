@@ -142,11 +142,11 @@ const navigation: SidebarNavItems[] = [
                 icon: LinkIcon,
                 href: siteUrls.dashboard.connect,
             },
-            // {
-            //     label: "Configuration",
-            //     icon: WrenchIcon,
-            //     href: siteUrls.dashboard.configuration,
-            // },
+            {
+                label: "Configuration",
+                icon: WrenchIcon,
+                href: siteUrls.dashboard.configuration,
+            },
             {
                 label: "Email Logs",
                 icon: BarChart4Icon,

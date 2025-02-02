@@ -1,5 +1,5 @@
 export const emailLogsPageConfig = {
-    title: "Email Logs",
-    description: "View logs of all email communications of your connected accounts.",
+    title: "Blacklist & Notification Configuration",
+    description: "Manage email blacklists and notification settings for your organization.",
 } as const;
 

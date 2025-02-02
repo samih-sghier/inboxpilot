@@ -273,3 +273,16 @@ export async function getPaginatedOrgsQuery(input: GetPaginatedOrgsQueryProps) {
 
     return { data, pageCount, total };
 }
+
+
+export async function getOrgConfigurations() {
+    await protectedProcedure();
+
+    const { currentOrg } = await getOrganizations();
+
+    return {
+        blacklist_domains: currentOrg.blacklist_domains|| [],
+        blacklist_emails: currentOrg.blacklist_emails|| [],
+        notification_emails: currentOrg.notification_emails|| [],
+    };
+}

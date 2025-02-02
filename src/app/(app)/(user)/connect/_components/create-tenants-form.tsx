@@ -47,7 +47,7 @@ export function ConnectEmailForm({ defaultOpen, orgId, upgradeNeeded, hasUploade
         defaultValues: {
             purpose: "",
             sendMode: "",
-            reveal_ai: true
+            reveal_ai: false
         },
     });
 

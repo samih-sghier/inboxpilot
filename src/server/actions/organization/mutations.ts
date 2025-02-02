@@ -12,8 +12,8 @@ import {
     organizations,
 } from "@/server/db/schema";
 import { adminProcedure, protectedProcedure } from "@/server/procedures";
-import { and, eq } from "drizzle-orm";
-import { getOrganizations } from "@/server/actions/organization/queries";
+import { and, eq, sql } from "drizzle-orm";
+import { getOrganizations, getOrgConfigurations } from "@/server/actions/organization/queries";
 import { z } from "zod";
 
 /**
@@ -461,4 +461,174 @@ export async function removeUserMutation({ memberId }: RemoveUserProps) {
         return result;
     }
     throw new Error("You are not an admin of this organization");
+}
+
+
+
+/**
+ * Add a domain to the blacklist
+ * @param domain - The domain to add
+ */
+
+export async function addBlacklistDomain(domain: string) {
+    await protectedProcedure();
+    const { currentOrg } = await getOrganizations();
+
+    const orgSettings = await getOrgConfigurations();
+
+    if (!orgSettings.blacklist_domains.includes(domain)) {
+        try {
+            // Use .push() to add the domain to the blacklist_domains array
+            const newArr = [...orgSettings.blacklist_domains]; // Create a copy to avoid mutating original state
+            newArr.push(domain);
+
+            await db
+                .update(organizations)
+                .set({
+                    blacklist_domains: newArr,
+                })
+                .where(eq(organizations.id, currentOrg.id))
+                .execute();
+
+            console.log(`Added ${domain} to the blacklist.`);
+        } catch (error) {
+            console.error("Failed to add domain to blacklist:", error);
+            throw error;
+        }
+    }
+}
+
+
+/**
+ * Remove a domain from the blacklist
+ * @param domain - The domain to remove
+ */
+export async function removeBlacklistDomain(domain: string) {
+    await protectedProcedure();
+    const { currentOrg } = await getOrganizations();
+
+    const orgSettings = await getOrgConfigurations();
+
+    if (orgSettings.blacklist_domains.includes(domain)) {
+        try {
+            const updatedDomains = orgSettings.blacklist_domains.filter(
+                (d) => d !== domain
+            );
+            await db
+                .update(organizations)
+                .set({ blacklist_domains: updatedDomains })
+                .where(eq(organizations.id, currentOrg.id))
+                .execute();
+        } catch (error) {
+            console.error("Failed to remove domain from blacklist:", error);
+            throw error; // Re-throw to handle in the client
+        }
+    }
+}
+
+// Similar improvements for other functions
+
+
+export async function addBlacklistEmail(email: string) {
+    await protectedProcedure();
+    const { currentOrg } = await getOrganizations();
+    const orgSettings = await getOrgConfigurations();
+
+    if (!orgSettings.blacklist_emails.includes(email)) {
+        try {
+            // Use array_append to add a new email to the blacklist_emails array
+            var newArr = orgSettings.blacklist_emails;
+            newArr.push(email);
+            await db
+                .update(organizations)
+                .set({
+                    blacklist_emails: newArr,
+                })
+                .where(eq(organizations.id, currentOrg.id))
+                .execute();
+
+            console.log(`Added ${email} to the blacklist.`);
+        } catch (error) {
+            console.error("Failed to add email to blacklist:", error);
+            throw error;
+        }
+    }
+}
+
+
+
+/**
+ * Remove an email from the blacklist
+ * @param email - The email to remove
+ */
+export async function removeBlacklistEmail(email: string) {
+    await protectedProcedure();
+    const { currentOrg } = await getOrganizations();
+
+    const orgSettings = await getOrgConfigurations();
+
+    if (orgSettings.blacklist_emails.includes(email)) {
+        const updatedEmails = orgSettings.blacklist_emails.filter(
+            (e) => e !== email
+        );
+        await db
+            .update(organizations)
+            .set({ blacklist_emails: updatedEmails })
+            .where(eq(organizations.id, currentOrg.id))
+            .execute();
+    }
+}
+
+/**
+ * Add an email to the notification list
+ * @param email - The email to add
+ */
+export async function addNotificationEmail(email: string) {
+    await protectedProcedure();
+    const { currentOrg } = await getOrganizations();
+
+    const orgSettings = await getOrgConfigurations();
+
+    if (!orgSettings.notification_emails.includes(email)) {
+        try {
+            // Use .push() to add the email to the notification_emails array
+            const newArr = [...orgSettings.notification_emails]; // Create a copy to avoid mutating original state
+            newArr.push(email);
+
+            await db
+                .update(organizations)
+                .set({
+                    notification_emails: newArr,
+                })
+                .where(eq(organizations.id, currentOrg.id))
+                .execute();
+
+            console.log(`Added ${email} to the notification list.`);
+        } catch (error) {
+            console.error("Failed to add email to notification list:", error);
+            throw error;
+        }
+    }
+}
+
+/**
+ * Remove an email from the notification list
+ * @param email - The email to remove
+ */
+export async function removeNotificationEmail(email: string) {
+    await protectedProcedure();
+    const { currentOrg } = await getOrganizations();
+
+    const orgSettings = await getOrgConfigurations();
+
+    if (orgSettings.notification_emails.includes(email)) {
+        const updatedEmails = orgSettings.notification_emails.filter(
+            (e) => e !== email
+        );
+        await db
+            .update(organizations)
+            .set({ notification_emails: updatedEmails })
+            .where(eq(organizations.id, currentOrg.id))
+            .execute();
+    }
 }

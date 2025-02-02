@@ -138,6 +138,25 @@ export const organizations = createTable("organization", {
     max_emails: integer("max_emails").default(freePricingPlan?.monthlyEmails || 0),
     email: varchar("email", { length: 255 }).notNull(),
     image: varchar("image", { length: 255 }),
+    blacklist_domains: text("blacklist_domains").array().default([
+    "craigslist.com",
+    "craigslist.org",
+    "shopify.com",
+    "amazon.com",
+    "linkedin.com",
+    "wayfair.com",
+    "google.com",
+    "quora.com",
+    "facebook.com",
+    "facebookmail.com",
+    "googlemail.com",
+    "stripe.com",
+    "reddit.com",
+    "medium.com",
+    "microsoft.com"
+  ]),
+    blacklist_emails: text("blacklist_emails").array().default([]),
+    notification_emails: text("notification_emails").array().default([]),    
     createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
     ownerId: varchar("ownerId", { length: 255 })
         .notNull()
@@ -406,7 +425,7 @@ export const connected = createTable("connected", {
     sendMode: text("sendMode").notNull(),
     provider: varchar("provider", { length: 255 }).notNull(),
     isActive: boolean("isActive").default(true),
-    reveal_ai: boolean("reveal_ai").default(true),
+    reveal_ai: boolean("reveal_ai").default(false),
     expires_at: integer("expires_at"),
     lastOn: timestamp("lastOn", { mode: "date" }),
     //gmail watchlist
@@ -420,6 +439,30 @@ export const connected = createTable("connected", {
     createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
 });
 
+// export const social = createTable("social", {
+//     pageId: text("pageId")
+//         .notNull()
+//         .primaryKey()
+//         .unique(),
+//     orgId: text("orgId")
+//         .notNull()
+//         .unique()
+//         .references(() => organizations.id, { onDelete: "cascade" }),
+//     access_token: text("access_token").notNull(),
+//     refresh_token: text("refresh_token"),
+//     pageName: text("pageName"),
+//     purpose: text("purpose"),
+//     provider: varchar("provider", { length: 255 }).notNull(),
+//     isActive: boolean("isActive").default(true),
+//     reveal_ai: boolean("reveal_ai").default(true),
+//     lastOn: timestamp("lastOn", { mode: "date" }),
+//     //outlook
+//     userId: text("userId"),
+//     expiration: integer("expiration"),
+//     updatedOn: timestamp("updatedOn", { mode: "date" }).defaultNow(),
+//     createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
+// });
+
 export const connectedInsertSchema = z.object({
     email: z.string().email("Email must be a valid email address"),
     orgId: z.string(), // Generic string instead of UUID
@@ -430,7 +473,7 @@ export const connectedInsertSchema = z.object({
     expiration: z.bigint().optional(), // Add expiration as optional
     purpose: z.string().optional(),
     sendMode: z.string().default("draft"),
-    reveal_ai: z.boolean().default(true),
+    reveal_ai: z.boolean().default(false),
     subscriptionId: z.string().optional(),
     userId: z.string().optional(),
     isActive: z.boolean().default(true),
