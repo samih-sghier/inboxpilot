@@ -16,7 +16,7 @@ import { ArrowRightIcon } from "lucide-react";
 import HowItWorks from "@/app/(web)/_components/howitworks";
 
 export const metadata: Metadata = {
-    title: "Automate Email Replies",    
+    title: "Automate Email Replies",
     alternates: {
         canonical: `${siteUrls.publicUrl}`,
     },
@@ -39,15 +39,14 @@ export default async function HomePage() {
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
-
-                    AI that learns your business and replies to emails 24/7 from your support email account!
+                    An AI that learns your business, connects to your support inbox, and replies to emails 24/7—perfectly tailored to your brand's voice.
                 </Balancer>
 
                 <Balancer
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
-                    Connect your email, train AI with your company data (website, faq...) and let it reply to all incoming emails around the clock—delivering responses in your brand's voice.
+                    Simply connect your email, train the AI with your company data (website, FAQs, etc.), and let it handle all incoming emails effortlessly.
                 </Balancer>
 
                 <div className="flex items-center gap-2">
