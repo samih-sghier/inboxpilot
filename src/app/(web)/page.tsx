@@ -33,8 +33,8 @@ export default async function HomePage() {
         <WebPageWrapper>
             <WebPageHeader
                 badge="Email Support on Autopilot"
-                title={`AI-Powered Email Replies, 24/7`}
-            >
+                title={`AI-Powered Email Replies for your business`}
+                >
                 <Balancer
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
