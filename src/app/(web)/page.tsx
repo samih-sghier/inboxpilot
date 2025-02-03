@@ -33,13 +33,13 @@ export default async function HomePage() {
         <WebPageWrapper>
             <WebPageHeader
                 badge="Email Support on Autopilot"
-                title={`Auto Reply Email Chatbot for your business`}
-                >
+                title="Custom Chatbot for your support email"
+            >
                 <Balancer
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
-                    An AI that learns your business, connects to your support inbox, and replies to emails 24/7—perfectly tailored to your brand's voice.
+                    An AI that learns your business, connects to your inbox, and autoreplies to inbound emails 24/7—perfectly tailored to your brand’s voice.
                 </Balancer>
 
                 <Balancer
@@ -78,7 +78,7 @@ export default async function HomePage() {
             <Features />
             <Promotion />
             {/* <Testimonials /> */}
-        </WebPageWrapper>
+        </WebPageWrapper >
     );
 }
 
