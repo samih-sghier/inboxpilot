@@ -74,9 +74,9 @@ export const companyFooterNavigation: NavigationItem[] = [
         href: siteUrls.terms,
         label: "Terms of Service",
     },
-    {
-        id: "careers",
-        href: 'https://www.linkedin.com/company/inboxpilot',
-        label: "Careers",
-    },
+    // {
+    //     id: "careers",
+    //     href: 'https://www.linkedin.com/company/inboxpilot',
+    //     label: "Careers",
+    // },
 ];
